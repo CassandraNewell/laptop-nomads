@@ -232,7 +232,11 @@ DEPENDENCIES
   database_cleaner
   devise
   dotenv-rails
+<<<<<<< HEAD
   factory_bot_rails
+=======
+  factory_bot
+>>>>>>> master
   faker
   foundation-rails (~> 5.0)
   jbuilder (~> 2.5)
