@@ -2,25 +2,16 @@
 
 ![Build Status](https://codeship.com/projects/0b377c00-70cb-0136-0bd5-0279716e1f9a/status?branch=master)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Laptop Nomads
+This app curates reviews for venues that provide a good place for people to work
+with laptops (e.g., specific cafes, libraries, etc.) and provides details of the
+venue's amenities.
 
-Things you may want to cover:
+Erin Christensen, Sophie Cho, Dave Atwater, Casi Newell
 
-* Ruby version
+Heroku link: (pending)
 
-* System dependencies
+Ruby v.2.3.3
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Features (pending)
+Technologies (pending)
