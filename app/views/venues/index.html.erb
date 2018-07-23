@@ -1,0 +1,7 @@
+<h1> Venues </h1>
+<% @venues.each do |venue| %>
+  <div>
+    <img src="<%= venue.photo_url %>" alt="Photo of <%= venue.name %>" class="venue-index-pic">
+    <%= venue.name %>
+  </div>
+<% end %>
