@@ -21,7 +21,7 @@ feature 'user registers', %Q{
     fill_in 'Last Name', with: user.last_name
     fill_in 'Email', with: 'email@example.com'
     fill_in 'Bio', with: user.bio
-    fill_in 'Profile Photo', with: user.profile_photo
+    attach_file :user_profile_photo, "#{Rails.root}/spec/support/images/unicorn-cake.jpg"
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
 
