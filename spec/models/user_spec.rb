@@ -2,29 +2,35 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "validations" do
+    let(:user) { FactoryBot.build(:user) }
+    let(:user1) { FactoryBot.build(:user, first_name: "") }
+    let(:user2) { FactoryBot.build(:user, last_name: "") }
+    let(:user3) { FactoryBot.build(:user, email: "") }
+    let(:user4) { FactoryBot.build(:user, bio: "") }
+    let(:user5) { FactoryBot.build(:user, profile_photo: "") }
 
     it "is not valid without a first name" do
-      expect(User.create(last_name: "Doe", email: "jane@doe.com", bio: "Jane Doe's Bio", profile_photo: "http://janedoe.com/jane.jpg", password: "abcd1234")).to_not be_valid
+      expect(user1).to_not be_valid
     end
 
     it "is not valid without a last name" do
-      expect(User.create(first_name: "Jane", email: "jane@doe.com", bio: "Jane Doe's Bio", profile_photo: "http://janedoe.com/jane.jpg", password: "abcd1234")).to_not be_valid
+      expect(user2).to_not be_valid
     end
 
     it "is not valid without an email" do
-      expect(User.create(first_name: "Jane", last_name: "Doe", bio: "Jane Doe's Bio", profile_photo: "http://janedoe.com/jane.jpg", password: "abcd1234")).to_not be_valid
+      expect(user3).to_not be_valid
     end
 
     it "is valid without a bio" do
-      expect(User.create(first_name: "Jane", last_name: "Doe", email: "jane@doe.com", profile_photo: "http://janedoe.com/jane.jpg", password: "abcd1234")).to be_valid
+      expect(user4).to be_valid
     end
 
     it "is valid without a profile photo" do
-      expect(User.create(first_name: "Jane", last_name: "Doe", email: "jane@doe.com", bio: "Jane Doe's Bio", password: "abcd1234")).to be_valid
+      expect(user5).to be_valid
     end
 
     it "is valid with valid attributes" do
-      expect(User.create(first_name: "Jane", last_name: "Doe", email: "jane@doe.com", bio: "Jane Doe's Bio", profile_photo: "http://janedoe.com/jane.jpg", password: "abcd1234")).to be_valid
+      expect(user).to be_valid
     end
   end
 end
