@@ -5,7 +5,7 @@ feature 'user visits venue index', %Q{
   I want to see all venues
   So that I can find a place to work
 } do
-  scenario 'visits /venues and sees list of venues' do
+  xscenario 'visits /venues and sees list of venues' do
     venue = FactoryBot.create(:venue)
     photo = venue.photo_url
     visit '/venues'
@@ -14,7 +14,7 @@ feature 'user visits venue index', %Q{
     expect(page).to have_css('.venue-index-pic')
   end
 
-  scenario 'visits root and sees list of venues' do
+  xscenario 'visits root and sees list of venues' do
     venue = FactoryBot.create(:venue)
 
     visit '/'
