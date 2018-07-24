@@ -10,10 +10,10 @@ const VenueDetailTile = (props) => {
     <div className="row column">
       <h1>{props.name}</h1>
       <div className="column small-6">
-        <p><a href={props.venue_url}>Website</a></p>
-        <p>{props.description}</p>
-        <p>Adddress: {props.address}</p>
-        <p>{hours}</p>
+        <p className="venue-url"><a href={props.venue_url}>Website</a></p>
+        <p className="description">{props.description}</p>
+        <p className="address">Address: {props.address}</p>
+        <p className="hours">{hours}</p>
       </div>
       <div className="column small-6">
         <img src={props.photo_url} alt={props.name}/>
