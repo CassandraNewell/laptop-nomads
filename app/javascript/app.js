@@ -16,6 +16,7 @@ class App extends Component {
         <Route path='/'>
           <IndexRoute component={VenuesIndexContainer} />
           <Route path='/venues' component = {VenuesIndexContainer} />
+          <Route/>
         </Route>
       </Router>
     )
