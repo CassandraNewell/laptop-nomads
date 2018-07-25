@@ -1,10 +1,6 @@
-// test/components/Elephant.js
 import VenueDetailTile from '../../../app/javascript/components/VenueDetailTile';
-import { mount } from 'enzyme';
-import jasmineEnzyme from 'jasmine-enzyme';
-import React from 'react';
 
-describe('Venue', () => {
+describe('VenueDetailTile', () => {
   let name,
       address,
       description,
@@ -36,6 +32,10 @@ describe('Venue', () => {
       expect(wrapper.find('p.venue-url').text()).toEqual('Website');
     });
 
+  it('should direct to the Website', () => {
+      expect(wrapper.find('a').getDOMNode().getAttribute('href')).toEqual('www.internet.com');
+    });
+
   it('should show the Description', () => {
       expect(wrapper.find('p.description').text()).toEqual('I am not an Elephant!');
     });
@@ -44,5 +44,16 @@ describe('Venue', () => {
       expect(wrapper.find('p.hours').text()).toEqual('Hours: 4 AM - 2 PM');
     });
 
+  it('should show the Name', () => {
+      expect(wrapper.find('h1').text()).toEqual('Chadwick\'s');
+    });
 
+
+  it('should display the Image', () => {
+      expect(wrapper.find('img').getDOMNode().getAttribute('src')).toEqual('https://i.pinimg.com/originals/e3/4e/ce/e34ece551a9777790b186c6bfb0dfa82.jpg');
+    });
+
+  it('should display the Alt Text', () => {
+      expect(wrapper.find('img').getDOMNode().getAttribute('alt')).toEqual('Chadwick\'s');
+    });
 });
