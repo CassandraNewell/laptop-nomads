@@ -35,4 +35,4 @@ yarn-debug.log*
 /public/uploads
 
 # Ignore coverage files from Jasmine
-coverage/*
+/coverage/*
