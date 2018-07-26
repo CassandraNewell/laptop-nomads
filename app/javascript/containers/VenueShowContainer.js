@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import VenueDetailTile from '../components/VenueDetailTile';
 import ReviewsIndexContainer from './ReviewsIndexContainer';
+import ReviewFormContainer from './ReviewFormContainer';
 
 class VenueShowContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       venue: {},
-      reviews: []
+      reviews: [],
+      body: "",
+      rating: ""
     }
+    this.onReviewChange = this.onReviewChange.bind(this)
+    this.onReviewSubmit = this.onReviewSubmit.bind(this)
   }
 
   componentDidMount(){
@@ -32,8 +37,46 @@ class VenueShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  onReviewChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  onReviewSubmit(event) {
+    event.preventDefault()
+    let payload = {
+      review: {
+        body: this.state.body,
+        rating: this.state.rating,
+      }
+    }
+    fetch(`/api/v1/venues/${this.props.params.id}/reviews`, {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      debugger
+      console.log('Did a fetch')
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   render(){
     let venue = this.state.venue
+    debugger
     // debugger
     return(
       <div className="row column">
@@ -48,6 +91,11 @@ class VenueShowContainer extends Component {
         />
         <ReviewsIndexContainer
           reviews = {this.state.reviews}
+        />
+        <ReviewFormContainer
+          venue_id = {venue.id}
+          onChange = {this.onReviewChange}
+          onSubmit = {this.onReviewSubmit}
         />
       </div>
     )

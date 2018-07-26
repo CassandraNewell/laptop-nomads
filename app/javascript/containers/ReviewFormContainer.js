@@ -5,26 +5,37 @@ class ReviewFormContainer extends Component {
     super(props);
     this.state = {
       body: "",
-      review: ""
+      rating: ""
     }
   }
 
-  render(){
+  // handleChange(event) {
+  //   this.setState({
+  //     [event.target.name]: event.target.value
+  //   })
+  // }
 
+  render(){
     return(
-      <InputTile
-        name="body"
-        type="text"
-        value={this.state.props.value}
-        onChange={this.props.handleChange}
-      />
-      <InputTile
-        name="rating"
-        type="text"
-        value={this.state.props.value}
-        onChange={this.props.handleChange}
-      />
-      <input type="submit"/>
+      <div>
+        <form onSubmit={this.props.onSubmit} >
+          <InputTile
+            name="body"
+            label="Write your review:"
+            type="text"
+            value={this.state.body.value}
+            handleChange={this.props.onChange}
+          />
+          <InputTile
+            name="rating"
+            label="Rating (1-5)"
+            type="text"
+            value={this.state.rating.value}
+            handleChange={this.props.onChange}
+          />
+          <input type="submit" />
+        </form>
+      </div>
     )
   }
 }
