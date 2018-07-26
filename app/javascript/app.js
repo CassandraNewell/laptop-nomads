@@ -15,7 +15,6 @@ class App extends Component {
   render() {
     return(
       <Router history = {browserHistory}>
-
         <Route path='/'>
           <IndexRoute component={VenuesIndexContainer} />
           <Route path='/venues' component = {VenuesIndexContainer} />
@@ -23,8 +22,6 @@ class App extends Component {
             <Route path='/venues/:id/reviews' component = {ReviewsIndexContainer} />
           </Route>
         </Route>
-
-
       </Router>
     )
   }
