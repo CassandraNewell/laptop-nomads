@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReviewTile from '../components/ReviewTile'
 
 const ReviewsIndexContainer = (props) => {
-  let reviews = this.props.reviews.map(review => {
+  let reviews = props.reviews.map(review => {
     return(
       <ReviewTile
         key={review.id}

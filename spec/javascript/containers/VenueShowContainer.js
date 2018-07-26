@@ -34,7 +34,20 @@ describe('VenueShowContainer', () => {
       }
     fetchMock.get(`/api/v1/venues/${venue.id}`, {
       status: 200,
-      body: {"venue": venue}
+      body: {"venue": venue, "reviews": [
+        {
+           "id": 1,
+           "body": "Black as midnight on a moonless night.",
+           "rating": 3,
+           "fullname": "Hobert Kuphal"
+         },
+         {
+           "id": 2,
+           "body": "There was a fish in the percolator!",
+           "rating": 3,
+           "fullname": "Bryce Dibbert"
+         }
+       ]}
     });
     wrapper = mount(<VenueShowContainer params={{id: venue.id}}/>);
   });

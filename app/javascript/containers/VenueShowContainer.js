@@ -34,6 +34,7 @@ class VenueShowContainer extends Component {
 
   render(){
     let venue = this.state.venue
+
     return(
       <div className="row column">
         <VenueDetailTile
