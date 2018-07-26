@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import VenueTile from '../components/VenueTile';
+import VenueDetailTile from '../components/VenueDetailTile'
 
-class VenuesIndexContainer extends Component {
+class VenueShowContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      venues_array: []
+      venue: {}
     }
   }
 
   componentDidMount(){
-    fetch('/api/v1/venues')
+    fetch(`/api/v1/venues/${this.props.params.id}`)
     .then(response => {
       if (response.ok) {
         return response;
@@ -23,35 +23,28 @@ class VenuesIndexContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        venues_array: body.venues
+        venue: body.venue
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-
   render(){
-
-    let venues = this.state.venues_array.map((venue) =>{
-      return(
-        <div>
-          <VenueTile
-            key = {venue.id}
-            id = {venue.id}
-            name = {venue.name}
-            photo_url = {venue.photo_url}
-          />
-        </div>
-      )
-    })
-
+    let venue = this.state.venue
     return(
       <div>
-        <h1> Venues </h1>
-        {venues}
+        <VenueDetailTile
+          name = {venue.name}
+          address = {venue.address}
+          description = {venue.description}
+          open_time = {venue.open_time}
+          close_time = {venue.close_time}
+          venue_url = {venue.venue_url}
+          photo_url = {venue.photo_url}
+        />
       </div>
     )
   }
 }
 
-export default VenuesIndexContainer;
+export default VenueShowContainer

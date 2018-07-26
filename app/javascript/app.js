@@ -18,10 +18,11 @@ class App extends Component {
         <Route path='/'>
           <IndexRoute component={VenuesIndexContainer} />
           <Route path='/venues' component = {VenuesIndexContainer} />
+          <Route path='/venues/:id' component = {VenueShowContainer} />
         </Route>
 
         <Route path='/reviews' component = {ReviewsIndexContainer} />
-        
+
       </Router>
     )
   }
