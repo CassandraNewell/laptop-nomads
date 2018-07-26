@@ -3,6 +3,5 @@ class VenuesController < ApplicationController
     @venues = Venue.all
   end
 
-  def show
-  end
+  def show; end
 end
