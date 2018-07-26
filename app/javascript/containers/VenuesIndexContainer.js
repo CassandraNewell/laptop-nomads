@@ -10,7 +10,7 @@ class VenuesIndexContainer extends Component {
   }
 
   componentDidMount(){
-    fetch('/api/v1/venues')
+    fetch(`/api/v1/venues`)
     .then(response => {
       if (response.ok) {
         return response;

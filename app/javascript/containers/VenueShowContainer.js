@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import VenueDetailTile from '../components/VenueDetailTile'
+import VenueDetailTile from '../components/VenueDetailTile';
+import ReviewsIndexContainer from './ReviewsIndexContainer';
 
 class VenueShowContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      venue: {}
+      venue: {},
+      reviews: []
     }
   }
 
@@ -23,7 +25,8 @@ class VenueShowContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        venue: body.venue
+        venue: body.venue,
+        reviews: body.venue.reviews
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -31,8 +34,9 @@ class VenueShowContainer extends Component {
 
   render(){
     let venue = this.state.venue
+    // debugger
     return(
-      <div>
+      <div className="row column">
         <VenueDetailTile
           name = {venue.name}
           address = {venue.address}
@@ -41,6 +45,9 @@ class VenueShowContainer extends Component {
           close_time = {venue.close_time}
           venue_url = {venue.venue_url}
           photo_url = {venue.photo_url}
+        />
+        <ReviewsIndexContainer
+          reviews = {this.state.reviews}
         />
       </div>
     )

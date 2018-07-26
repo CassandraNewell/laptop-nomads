@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import VenuesIndexContainer from './containers/VenuesIndexContainer';
+import VenueShowContainer from './containers/VenueShowContainer';
 import ReviewsIndexContainer from './containers/ReviewsIndexContainer';
 
 class App extends Component {
@@ -18,10 +19,11 @@ class App extends Component {
         <Route path='/'>
           <IndexRoute component={VenuesIndexContainer} />
           <Route path='/venues' component = {VenuesIndexContainer} />
-          <Route path='/venues/:id' component = {VenueShowContainer} />
+          <Route path='/venues/:id' component = {VenueShowContainer}>
+            <Route path='/venues/:id/reviews' component = {ReviewsIndexContainer} />
+          </Route>
         </Route>
 
-        <Route path='/reviews' component = {ReviewsIndexContainer} />
 
       </Router>
     )

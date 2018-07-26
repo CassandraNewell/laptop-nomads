@@ -5,34 +5,11 @@ class ReviewsIndexContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      reviews_array: []
     }
   }
 
-  componentDidMount() {
-    fetch('/api/v1/reviews')
-    .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage);
-        throw(error);
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      this.setState({
-        reviews_array: body.reviews
-      })
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
-
-
   render() {
-
-    let reviews = this.state.reviews_array.map(review => {
+    let reviews = this.props.reviews.map(review => {
       return(
         <ReviewTile
           key={review.id}
@@ -43,8 +20,6 @@ class ReviewsIndexContainer extends Component {
         />
       )
     })
-
-
 
     return(
       <div>

@@ -17,8 +17,52 @@ Venue.create(
   photo_url: "https://78.media.tumblr.com/tumblr_lw1tlukZwH1r5nekno1_500.gif"
 )
 
-Venue.create(name: "Three Little Figs", address: "Highland Ave", photo_url: "https://pre06.deviantart.net/3389/th/pre/i/2011/187/9/8/dramatic_hover_cat_by_theprophetchuck-d3l8m55.jpg")
+Venue.create(
+  name: "Three Little Figs",
+  address: "Highland Ave",
+  photo_url: "https://pre06.deviantart.net/3389/th/pre/i/2011/187/9/8/dramatic_hover_cat_by_theprophetchuck-d3l8m55.jpg"
+)
 
-User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "asdfasdf")
-User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "asdfasdf")
-User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "asdfasdf")
+3.times do
+    User.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: "asdfasdf"
+  )
+end
+
+Review.create!(
+  body: Faker::TwinPeaks.quote,
+  rating: 3,
+  venue: Venue.first,
+  user: User.first
+)
+
+Review.create!(
+  body: Faker::TwinPeaks.quote,
+  rating: 3,
+  venue: Venue.first,
+  user: User.second
+)
+
+Review.create!(
+  body: Faker::TwinPeaks.quote,
+  rating: 3,
+  venue: Venue.second,
+  user: User.first
+)
+
+Review.create!(
+  body: Faker::TwinPeaks.quote,
+  rating: 3,
+  venue: Venue.second,
+  user: User.second
+)
+
+Review.create!(
+  body: Faker::TwinPeaks.quote,
+  rating: 3,
+  venue: Venue.second,
+  user: User.second
+)
