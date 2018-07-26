@@ -36,3 +36,5 @@ yarn-debug.log*
 
 # Ignore coverage files from Jasmine
 /coverage/*
+
+.DS_Store

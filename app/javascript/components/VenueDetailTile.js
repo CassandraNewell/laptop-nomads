@@ -7,7 +7,7 @@ const VenueDetailTile = (props) => {
   }
 
   return(
-    <div className="row column">
+    <div>
       <h1>{props.name}</h1>
       <div className="column small-6">
         <p className="venue-url"><a href={props.venue_url}>Website</a></p>
