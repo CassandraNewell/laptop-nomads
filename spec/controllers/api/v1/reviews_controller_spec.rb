@@ -1,13 +1,14 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ReviewsController, type: :controller do
-  let!(:first_review) { FactoryBot.create(:review) }
-  let!(:second_review) { FactoryBot.create(:review) }
+  let!(:first_venue) { FactoryBot.create(:venue) }
+  let!(:first_review) { FactoryBot.create(:review, venue: first_venue) }
+  let!(:second_review) { FactoryBot.create(:review, venue: first_venue) }
 
   describe "GET#index" do
     it "should return a list of all the reviews" do
 
-      get :index
+      get :index, params: {venue_id: 1}
       returned_json = JSON.parse(response.body)
       reviews = returned_json["reviews"]
       expect(response.status).to eq 200
