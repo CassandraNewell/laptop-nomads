@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import VenueTile from '../components/VenueTile';
+import VenueFormContainer from './VenueFormContainer'
+import { Link } from 'react-router'
 
 class VenuesIndexContainer extends Component {
   constructor(props) {
@@ -34,21 +36,19 @@ class VenuesIndexContainer extends Component {
 
     let venues = this.state.venues_array.map((venue) =>{
       return(
-        <div>
-          <VenueTile
-            key = {venue.id}
-            id = {venue.id}
-            name = {venue.name}
-            photo_url = {venue.photo_url}
-          />
-        </div>
+        <VenueTile
+          key = {venue.id}
+          id = {venue.id}
+          name = {venue.name}
+          photo_url = {venue.photo_url}
+        />
       )
     })
 
     return(
       <div>
-        <h1> Venues </h1>
         {venues}
+        <Link to={'/venues/new'}>Add a Venue</Link>
       </div>
     )
   }
