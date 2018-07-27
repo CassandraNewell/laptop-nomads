@@ -53,9 +53,8 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      debugger
       if (body.review.id) {
-        this.setState({ reviews: this.state.reviews.concat(body.review) })
+        this.setState({ reviews: this.state.reviews.concat(body.review[0]) })
       }
       this.setState({
         status_messages: body.status_messages
@@ -82,7 +81,7 @@ class VenueShowContainer extends Component {
         <ReviewsIndexContainer
           reviews = {reviews}
         />
-        <h2>{this.state.status_messages}</h2>
+        <div className="notice">{this.state.status_messages}</div>
         <ReviewFormContainer
           venue_id = {venue.id}
           onSubmit = {this.onSubmit}

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ReviewTile = (props) => {
-// debugger
   return(
     <div>
       <h5>{props.fullname} gave a rating of {props.rating}/5</h5>

@@ -14,8 +14,9 @@ class Api::V1::ReviewsController < ApiController
 
 
     if review.save
+      serialized_review = ActiveModel::Serializer::ArraySerializer.new([review], each_serializer: ::ReviewSerializer)
       payload = {
-        review: review,
+        review: serialized_review,
         status_messages: ["Review successfully added"]
       }
       render json: payload

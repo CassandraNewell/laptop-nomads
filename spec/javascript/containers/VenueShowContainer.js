@@ -43,7 +43,11 @@ describe('VenueShowContainer', () => {
   describe('Show Page', () => {
 
     it('should have the specified initial state', () => {
-      expect(wrapper.state()).toEqual({venue: {}, reviews: []})
+      expect(wrapper.state()).toEqual({
+        venue: {},
+        reviews: [],
+        status_messages: []
+      })
     })
 
     it('Should render a Venue Detail Tile', (done) => {

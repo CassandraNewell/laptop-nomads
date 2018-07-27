@@ -23,7 +23,7 @@ class ReviewsIndexContainer extends Component {
 
     return(
       <div>
-        <h1>Reviews Index Container</h1>
+        <h2>Reviews</h2>
         {reviews}
       </div>
     )
