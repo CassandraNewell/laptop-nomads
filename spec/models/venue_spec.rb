@@ -1,47 +1,36 @@
 require 'rails_helper'
 
-RSpec.describe Venue, type: :model do
+RSpec.describe Review, type: :model do
   describe "validations" do
+    let(:user) { FactoryBot.build(:user) }
+    let(:user1) { FactoryBot.build(:user, first_name: "") }
+    let(:user2) { FactoryBot.build(:user, last_name: "") }
+    let(:user3) { FactoryBot.build(:user, email: "") }
+    let(:user4) { FactoryBot.build(:user, bio: "") }
+    let(:user5) { FactoryBot.build(:user, profile_photo: "") }
 
-    it "is valid with all attributes" do
-      venue = FactoryBot.build(:venue)
-      expect(venue).to be_valid
+    it "is not valid without a first name" do
+      expect(user1).to_not be_valid
     end
 
-    it "is not valid without name" do
-      venue = FactoryBot.build(:venue, name: nil)
-      expect(venue).to_not be_valid
+    it "is not valid without a last name" do
+      expect(user2).to_not be_valid
     end
 
-    it "is not valid without address" do
-      venue = FactoryBot.build(:venue, address: nil)
-      expect(venue).to_not be_valid
+    it "is not valid without an email" do
+      expect(user3).to_not be_valid
     end
 
-    it "is not valid without photo" do
-      venue = FactoryBot.build(:venue, photo_url: nil)
-      expect(venue).to_not be_valid
+    it "is valid without a bio" do
+      expect(user4).to be_valid
     end
 
-    it "is valid without description" do
-      venue = FactoryBot.build(:venue, description: nil)
-      expect(venue).to be_valid
+    it "is valid without a profile photo" do
+      expect(user5).to be_valid
     end
 
-    it "is valid without open_time" do
-      venue = FactoryBot.build(:venue, open_time: nil)
-      expect(venue).to be_valid
+    it "is valid with valid attributes" do
+      expect(user).to be_valid
     end
-
-    it "is valid without close_time" do
-      venue = FactoryBot.build(:venue, close_time: nil)
-      expect(venue).to be_valid
-    end
-
-    it "is valid without venue_url" do
-      venue = FactoryBot.build(:venue, venue_url: nil)
-      expect(venue).to be_valid
-    end
-
   end
 end
