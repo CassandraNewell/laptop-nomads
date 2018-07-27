@@ -11,7 +11,7 @@ class Api::V1::ReviewsController < ApiController
     venue = Venue.find(params[:venue_id])
     review = Review.new(review_json)
     review.venue = venue
-    review.user = User.first
+    review.user = current_user
 
     if review.save
       flash[:notice] = "Your review was successfully added!"
