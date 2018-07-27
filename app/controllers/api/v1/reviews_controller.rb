@@ -1,5 +1,4 @@
 class Api::V1::ReviewsController < ApiController
-  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     reviews = Review.where(venue_id: params[:venue_id])
@@ -13,12 +12,19 @@ class Api::V1::ReviewsController < ApiController
     review.venue = venue
     review.user = current_user
 
+
     if review.save
-      flash[:notice] = "Your review was successfully added!"
-      render json: review
+      payload = {
+        review: review,
+        status_messages: ["Review successfully added"]
+      }
+      render json: payload
     else
-      flash[:alert] = "Your review was not saved due to errors. Please try again."
-      render json: { error: review.errors.full_messages }, status: :unprocessable_entity
+      payload = {
+        review: review,
+        status_messages: review.errors.full_messages
+      }
+      render json: payload
     end
   end
 end

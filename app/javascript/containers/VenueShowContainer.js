@@ -8,7 +8,8 @@ class VenueShowContainer extends Component {
     super(props)
     this.state = {
       venue: {},
-      reviews: []
+      reviews: [],
+      status_messages: []
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -52,7 +53,13 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({ reviews: this.state.reviews.concat(body.review) })
+      debugger
+      if (body.review.id) {
+        this.setState({ reviews: this.state.reviews.concat(body.review) })
+      }
+      this.setState({
+        status_messages: body.status_messages
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -75,6 +82,7 @@ class VenueShowContainer extends Component {
         <ReviewsIndexContainer
           reviews = {reviews}
         />
+        <h2>{this.state.status_messages}</h2>
         <ReviewFormContainer
           venue_id = {venue.id}
           onSubmit = {this.onSubmit}
