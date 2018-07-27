@@ -110,7 +110,6 @@ class VenueFormContainer extends Component {
           />
           <input type="submit" value="Submit"/>
         </form>
-        <h1>{this.props.message}</h1>
         <h1>{this.state.status_messages}</h1>
       </div>
     )
