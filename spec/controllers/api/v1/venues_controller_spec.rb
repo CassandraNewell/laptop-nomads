@@ -40,4 +40,46 @@ RSpec.describe Api::V1::VenuesController, type: :controller do
       expect(venue["photo_url"]).to eq first_venue.photo_url
     end
   end
+
+  describe "POST#create" do
+    it "creates a new venue" do
+      post_json = {
+        name: first_venue.name,
+        address: first_venue.address,
+        photo_url: first_venue.photo_url
+    }
+      prev_count = Venue.count
+      post(:create, params: post_json)
+      expect(Venue.count).to eq(prev_count + 1)
+    end
+
+    it "fails to creates a new venue without required fields" do
+      post_json = {
+        name: first_venue.name,
+        address: first_venue.address,
+    }
+      prev_count = Venue.count
+      post(:create, params: post_json)
+      expect(Venue.count).to eq(prev_count)
+    end
+
+    it "returns the json of the new venue" do
+      post_json = {
+        name: first_venue.name,
+        address: first_venue.address,
+        photo_url: first_venue.photo_url
+    }
+      post(:create, params: post_json)
+      returned_json = JSON.parse(response.body)
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq("application/json")
+      venue = returned_json["venue"]
+
+      expect(returned_json).to be_kind_of(Hash)
+      expect(returned_json).to_not be_kind_of(Array)
+      expect(venue["name"]).to eq first_venue.name
+      expect(venue["address"]).to eq first_venue.address
+      expect(venue["photo_url"]).to eq first_venue.photo_url
+    end
+  end
 end
