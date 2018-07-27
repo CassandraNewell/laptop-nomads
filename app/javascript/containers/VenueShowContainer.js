@@ -8,12 +8,9 @@ class VenueShowContainer extends Component {
     super(props)
     this.state = {
       venue: {},
-      reviews: [],
-      body: "",
-      rating: ""
+      reviews: []
     }
-    this.onReviewChange = this.onReviewChange.bind(this)
-    this.onReviewSubmit = this.onReviewSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   componentDidMount(){
@@ -37,20 +34,7 @@ class VenueShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  onReviewChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  onReviewSubmit(event) {
-    event.preventDefault()
-    let payload = {
-      review: {
-        body: this.state.body,
-        rating: this.state.rating,
-      }
-    }
+  onSubmit(payload) {
     fetch(`/api/v1/venues/${this.props.params.id}/reviews`, {
       credentials: 'same-origin',
       method: 'POST',
@@ -68,16 +52,15 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      debugger
-      console.log('Did a fetch')
+      this.setState({ reviews: this.state.reviews.concat(body.review) })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render(){
     let venue = this.state.venue
-    debugger
-    // debugger
+    let reviews = this.state.reviews
+
     return(
       <div className="row column">
         <VenueDetailTile
@@ -90,12 +73,11 @@ class VenueShowContainer extends Component {
           photo_url = {venue.photo_url}
         />
         <ReviewsIndexContainer
-          reviews = {this.state.reviews}
+          reviews = {reviews}
         />
         <ReviewFormContainer
           venue_id = {venue.id}
-          onChange = {this.onReviewChange}
-          onSubmit = {this.onReviewSubmit}
+          onSubmit = {this.onSubmit}
         />
       </div>
     )

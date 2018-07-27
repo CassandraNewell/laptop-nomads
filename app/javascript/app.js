@@ -24,7 +24,6 @@ class App extends Component {
           </Route>
         </Route>
 
-
       </Router>
     )
   }

@@ -1,4 +1,6 @@
-class Api::V1::VenuesController < ApplicationController
+class Api::V1::VenuesController < ApiController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     render json: Venue.all
   end
