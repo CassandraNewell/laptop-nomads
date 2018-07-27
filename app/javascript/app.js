@@ -20,10 +20,9 @@ class App extends Component {
           <IndexRoute component={VenuesIndexContainer} />
           <Route path='/venues' component={VenuesIndexContainer} />
           <Route path='/venues/new' component={VenueFormContainer} />
-          <Route path='/venues/:id' component={VenueShowContainer} />
+          <Route path='/venues/:id' component={VenueShowContainer} >
             <Route path='/venues/:id/reviews' component={ReviewsIndexContainer} />
           </Route>
-
         </Route>
       </Router>
     )
