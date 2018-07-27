@@ -12,28 +12,17 @@ class VenueFormContainer extends Component {
       venueOpenTime: '',
       venueCloseTime: '',
       venueUrl: '',
-      venuePhotoUrl: ''
+      venuePhotoUrl: '',
+      status_messages: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClear = this.handleClear.bind(this);
   }
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleClear() {
-    this.setState({
-      name: '',
-      address: '',
-      description: '',
-      open_time: '',
-      close_time: '',
-      venue_url: '',
-      photo_url: ''
-     })
-  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -63,14 +52,15 @@ class VenueFormContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ venue: body.venue });
-        this.props.router.push(`/venues/${this.state.venue.id}`)
+        this.setState({ venue: body.venue,
+                        status_messages: body.status_messages
+                      });
+        if(this.state.venue.id){
+          this.props.router.push(`/venues/${this.state.venue.id}`)
+        }
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
-
-
-
 
   render() {
     return(
@@ -120,6 +110,8 @@ class VenueFormContainer extends Component {
           />
           <input type="submit" value="Submit"/>
         </form>
+        <h1>{this.props.message}</h1>
+        <h1>{this.state.status_messages}</h1>
       </div>
     )
   }

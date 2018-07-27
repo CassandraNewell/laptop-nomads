@@ -19,7 +19,7 @@ class App extends Component {
         <Route path='/'>
           <IndexRoute component={VenuesIndexContainer} />
           <Route path='/venues' component = {VenuesIndexContainer} />
-          <Route path='/venues/new' component = {VenueFormContainer} />
+          <Route path='/venues/new' component={() => (<VenueFormContainer message={"huh"} />)}/>
           <Route path='/venues/:id' component = {VenueShowContainer}>
             <Route path='/venues/:id/reviews' component = {ReviewsIndexContainer} />
           </Route>

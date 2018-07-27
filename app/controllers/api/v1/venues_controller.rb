@@ -22,10 +22,9 @@ class Api::V1::VenuesController < ApplicationController
       photo_url: params[:photo_url]
     )
     if venue.save
-      render json: { venue: venue }
-      #redirect_to '/'
+      render json: { venue: venue, status_messages: "Succes!"}
     else
-      render json: { error: venue.errors.full_messages }, status: :unprocessable_entity
+      render json: { venue: {}, status_messages: venue.errors.full_messages.join(', ') }
     end
   end
 end

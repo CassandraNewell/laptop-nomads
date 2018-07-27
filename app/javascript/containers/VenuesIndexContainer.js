@@ -7,7 +7,8 @@ class VenuesIndexContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      venues_array: []
+      venues_array: [],
+      message: "hi cat"
     }
   }
 
@@ -30,7 +31,6 @@ class VenuesIndexContainer extends Component {
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
-
 
   render(){
 
