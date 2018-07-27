@@ -12,7 +12,6 @@ class Api::V1::VenuesController < ApplicationController
   def new; end
 
   def create
-    #binding.pry
     venue = Venue.new(
       name: params[:name],
       address: params[:address],
