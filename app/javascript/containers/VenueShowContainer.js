@@ -89,7 +89,7 @@ class VenueShowContainer extends Component {
           reviews = {this.state.reviews}
         />
         <div className="notice">{this.state.notice}</div>
-        <div className="error">{this.state.errors}</div>
+        <div className="error">{this.state.errors.join("\n")}</div>
         <ReviewFormContainer
           venue_id = {venue.id}
           onSubmit = {this.onSubmit}

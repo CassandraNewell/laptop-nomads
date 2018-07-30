@@ -127,9 +127,7 @@ describe('VenueShowContainer', () => {
 
       setTimeout(() => {
         let listItemCount = wrapper.find('div.review').length
-
         wrapper.find('form').simulate('submit')
-
         setTimeout(() => {
           expect(wrapper.find('div.review').length).toEqual(listItemCount + 1)
           done()
@@ -140,13 +138,15 @@ describe('VenueShowContainer', () => {
     it('shows an error message when there is an error in response', (done) => {
       fetchMock.post('/api/v1/venues/1/reviews', {
         status: 201,
-        body: { errors: ["Body can't be blank", "Rating is not a number"] }
+        body: {
+          errors: ["Body can't be blank", "Rating is not a number"]
+        }
       });
       wrapper.find('.submit-button').simulate('submit')
       setTimeout(() => {
-        expect(wrapper.find('div.error')).toContain("Body can't be blank")
-        expect(wrapper.find('div.error')).toContain("Rating is not a number")
-        // expect(wrapper.find('ul.errors li').text()).toEqual("Title can't be blank")
+        let error_div = wrapper.find('div.error')
+        expect(error_div.text()).toContain("Body can't be blank")
+        expect(error_div.text()).toContain("Rating is not a number")
         done()
       }, 0)
     })
