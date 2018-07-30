@@ -5,25 +5,28 @@ class Api::V1::ReviewsController < ApiController
   end
 
   def create
-    review_json = JSON.parse(request.body.read)
     venue = Venue.find(params[:venue_id])
-    review = Review.new(review_json)
+    review = Review.new(review_data)
     review.venue = venue
     review.user = current_user
 
-    if review.save!
-      serialized_review = ActiveModel::Serializer::ArraySerializer.new([review], each_serializer: ::ReviewSerializer)
-      payload = {
-        review: serialized_review,
-        status_messages: ["Review successfully added"]
-      }
-      render json: payload
+    if review.save
+      render json: review
     else
+      binding.pry
       payload = {
-        review: {},
-        status_messages: review.errors.full_messages
+        errors: review.errors.full_messages
       }
       render json: payload
+      # payload = {
+      #   errors: review.errors.full_messages
+      # }
+      # render status: 422, json: payload
     end
+  end
+
+  private
+  def review_data
+    params.require(:review).permit(:body, :rating)
   end
 end

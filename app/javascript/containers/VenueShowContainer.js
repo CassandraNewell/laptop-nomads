@@ -8,8 +8,10 @@ class VenueShowContainer extends Component {
     super(props)
     this.state = {
       venue: {},
+      // consider breaking out, up to you
       reviews: [],
-      status_messages: []
+      notice: "",
+      errors: []
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -53,21 +55,24 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      console.log("Body.review:")
-      console.log(body.review)
-      if (body.review.id) {
-        this.setState({ reviews: this.state.reviews.concat(body.review[0]) })
+      if (body.errors) {
+        this.setState({errors: body.errors})
       }
-      this.setState({
-        status_messages: body.status_messages
-      })
+      else {
+        this.setState({
+          reviews: this.state.reviews.concat(body.review),
+          notice: "Review successfully added",
+          errors: []
+        })
+      }
     })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .catch(error => {
+      console.error(`Error in fetch: ${error.message}`)
+    });
   }
 
   render(){
     let venue = this.state.venue
-    let reviews = this.state.reviews
 
     return(
       <div className="row column">
@@ -81,9 +86,10 @@ class VenueShowContainer extends Component {
           photo_url = {venue.photo_url}
         />
         <ReviewsIndexContainer
-          reviews = {reviews}
+          reviews = {this.state.reviews}
         />
-        <div className="notice">{this.state.status_messages}</div>
+        <div className="notice">{this.state.notice}</div>
+        <div className="error">{this.state.errors}</div>
         <ReviewFormContainer
           venue_id = {venue.id}
           onSubmit = {this.onSubmit}
