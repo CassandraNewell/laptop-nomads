@@ -1,5 +1,4 @@
 class Api::V1::ReviewsController < ApiController
-
   def index
     reviews = Review.where(venue_id: params[:venue_id])
     render json: reviews
@@ -12,8 +11,7 @@ class Api::V1::ReviewsController < ApiController
     review.venue = venue
     review.user = current_user
 
-
-    if review.save
+    if review.save!
       serialized_review = ActiveModel::Serializer::ArraySerializer.new([review], each_serializer: ::ReviewSerializer)
       payload = {
         review: serialized_review,
