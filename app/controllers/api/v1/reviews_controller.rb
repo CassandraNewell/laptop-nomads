@@ -13,15 +13,10 @@ class Api::V1::ReviewsController < ApiController
     if review.save
       render json: review
     else
-      binding.pry
       payload = {
         errors: review.errors.full_messages
       }
       render json: payload
-      # payload = {
-      #   errors: review.errors.full_messages
-      # }
-      # render status: 422, json: payload
     end
   end
 
