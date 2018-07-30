@@ -1,6 +1,7 @@
 import VenueShowContainer from '../../../app/javascript/containers/VenueShowContainer';
 import ReviewsIndexContainer from '../../../app/javascript/containers/ReviewsIndexContainer';
 import VenueDetailTile from '../../../app/javascript/components/VenueDetailTile';
+import ReviewFormContainer from '../../../app/javascript/containers/ReviewFormContainer';
 import fetchMock from 'fetch-mock';
 
 describe('VenueShowContainer', () => {
@@ -53,10 +54,16 @@ describe('VenueShowContainer', () => {
   });
 
   afterEach(fetchMock.restore)
+
   describe('Show Page', () => {
 
     it('should have the specified initial state', () => {
-      expect(wrapper.state()).toEqual({venue: {}, reviews: []})
+      expect(wrapper.state()).toEqual({
+        venue: {},
+        reviews: [],
+        notice: "",
+        errors: []
+      })
     })
 
     it('Should render a Venue Detail Tile', (done) => {
@@ -92,6 +99,54 @@ describe('VenueShowContainer', () => {
              }
            ]
         })
+        done()
+      }, 0)
+    })
+
+    it('Should render a Review form with correct props', (done) => {
+      setTimeout(() => {
+        expect(wrapper.find(ReviewFormContainer).props()).toEqual({
+          venue_id: venue.id,
+          onSubmit: jasmine.any(Function)
+        })
+        done()
+      }, 0)
+    })
+
+    it('successfully adds a review when rating and body supplied', (done) => {
+      fetchMock.post(`/api/v1/venues/1/reviews`, {
+        status: 201,
+        body: {
+          review: [{
+             body: "I'm a test review",
+             rating: 5,
+             fullname: "Sophie Cho"
+            }]
+          }
+        });
+
+      setTimeout(() => {
+        let listItemCount = wrapper.find('div.review').length
+
+        wrapper.find('form').simulate('submit')
+
+        setTimeout(() => {
+          expect(wrapper.find('div.review').length).toEqual(listItemCount + 1)
+          done()
+        })
+      }, 0)
+    })
+
+    it('shows an error message when there is an error in response', (done) => {
+      fetchMock.post('/api/v1/venues/1/reviews', {
+        status: 201,
+        body: { errors: ["Body can't be blank", "Rating is not a number"] }
+      });
+      wrapper.find('.submit-button').simulate('submit')
+      setTimeout(() => {
+        expect(wrapper.find('div.error')).toContain("Body can't be blank")
+        expect(wrapper.find('div.error')).toContain("Rating is not a number")
+        // expect(wrapper.find('ul.errors li').text()).toEqual("Title can't be blank")
         done()
       }, 0)
     })

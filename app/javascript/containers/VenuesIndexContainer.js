@@ -33,15 +33,16 @@ class VenuesIndexContainer extends Component {
   }
 
   render(){
-
     let venues = this.state.venues_array.map((venue) =>{
       return(
-        <VenueTile
-          key = {venue.id}
-          id = {venue.id}
-          name = {venue.name}
-          photo_url = {venue.photo_url}
-        />
+        <div key={venue.id}>
+          <VenueTile
+            key = {venue.id}
+            id = {venue.id}
+            name = {venue.name}
+            photo_url = {venue.photo_url}
+          />
+        </div>
       )
     })
 
