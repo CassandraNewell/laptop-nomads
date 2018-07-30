@@ -8,7 +8,6 @@ class VenueShowContainer extends Component {
     super(props)
     this.state = {
       venue: {},
-      // consider breaking out, up to you
       reviews: [],
       notice: "",
       errors: []
@@ -56,7 +55,10 @@ class VenueShowContainer extends Component {
     .then(response => response.json())
     .then(body => {
       if (body.errors) {
-        this.setState({errors: body.errors})
+        this.setState({
+          notice: "",
+          errors: body.errors
+        })
       }
       else {
         this.setState({
@@ -89,7 +91,7 @@ class VenueShowContainer extends Component {
           reviews = {this.state.reviews}
         />
         <div className="notice">{this.state.notice}</div>
-        <div className="error">{this.state.errors.join("\n")}</div>
+        <div className="error">{this.state.errors}</div>
         <ReviewFormContainer
           venue_id = {venue.id}
           onSubmit = {this.onSubmit}

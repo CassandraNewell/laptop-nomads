@@ -50,7 +50,9 @@ describe('VenueShowContainer', () => {
          }
        ]}
     });
-    wrapper = mount(<VenueShowContainer params={{id: venue.id}}/>);
+    wrapper = mount(<VenueShowContainer
+      params={ {id: venue.id} }
+    />);
   });
 
   afterEach(fetchMock.restore)

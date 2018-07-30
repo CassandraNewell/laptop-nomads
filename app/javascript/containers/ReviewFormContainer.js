@@ -49,7 +49,7 @@ class ReviewFormContainer extends Component {
             value={this.state.rating}
             handleChange={this.handleChange}
           />
-        <input className="submit-button" type="submit" />
+          <input className="submit-button" type="submit" />
         </form>
       </div>
     )

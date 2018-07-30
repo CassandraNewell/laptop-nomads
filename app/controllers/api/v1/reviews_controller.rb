@@ -13,10 +13,7 @@ class Api::V1::ReviewsController < ApiController
     if review.save
       render json: review
     else
-      payload = {
-        errors: review.errors.full_messages
-      }
-      render json: payload
+      render json: { errors: review.errors.full_messages }
     end
   end
 

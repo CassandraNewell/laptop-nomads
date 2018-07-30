@@ -27,7 +27,6 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
 
   describe "POST#create" do
     it "should accept a new review and return the review and error messages" do
-
       get :create, params: {
         body: "hi",
         rating: 4,
