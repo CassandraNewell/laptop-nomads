@@ -20,7 +20,7 @@ class Api::V1::ReviewsController < ApiController
       render json: payload
     else
       payload = {
-        review: review,
+        review: {},
         status_messages: review.errors.full_messages
       }
       render json: payload

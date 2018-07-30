@@ -53,6 +53,8 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
+      console.log("Body.review:")
+      console.log(body.review)
       if (body.review.id) {
         this.setState({ reviews: this.state.reviews.concat(body.review[0]) })
       }
