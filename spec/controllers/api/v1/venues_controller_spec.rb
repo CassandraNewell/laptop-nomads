@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::VenuesController, type: :controller do
+  let!(:user) { FactoryBot.create(:user) }
   let!(:first_venue) { FactoryBot.create(:venue) }
   let!(:second_venue) { FactoryBot.create(:venue) }
 
@@ -43,10 +44,15 @@ RSpec.describe Api::V1::VenuesController, type: :controller do
 
   describe "POST#create" do
     it "creates a new venue" do
+
+      sign_in user
+
       post_json = {
+        venue: {
         name: first_venue.name,
         address: first_venue.address,
         photo_url: first_venue.photo_url
+      }
     }
       prev_count = Venue.count
       post(:create, params: post_json)
@@ -55,8 +61,10 @@ RSpec.describe Api::V1::VenuesController, type: :controller do
 
     it "fails to creates a new venue without required fields" do
       post_json = {
+        venue:{
         name: first_venue.name,
-        address: first_venue.address,
+        address: first_venue.address
+      }
     }
       prev_count = Venue.count
       post(:create, params: post_json)
@@ -64,10 +72,13 @@ RSpec.describe Api::V1::VenuesController, type: :controller do
     end
 
     it "returns the json of the new venue" do
+      sign_in user
       post_json = {
+        venue: {
         name: first_venue.name,
         address: first_venue.address,
         photo_url: first_venue.photo_url
+      }
     }
       post(:create, params: post_json)
       returned_json = JSON.parse(response.body)
