@@ -15,9 +15,15 @@ const ReviewsIndexContainer = (props) => {
   })
 
   return(
-    <div>
-      <h2>Reviews</h2>
-      {reviews}
+    <div className="grid-container bdgreen nomargin">
+      <div className="grid-y">
+        <div className="cell small-4 text-center">
+          <h2>Reviews</h2>
+        </div>
+        <div className="cell small-8 bdred">
+          {reviews}
+        </div>
+      </div>
     </div>
   )
 }

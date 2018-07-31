@@ -33,7 +33,7 @@ class ReviewFormContainer extends Component {
 
   render(){
     return(
-      <div>
+      <div className="grid-y bdred">
         <form onSubmit={this.passPayload} >
           <InputTile
             name="body"

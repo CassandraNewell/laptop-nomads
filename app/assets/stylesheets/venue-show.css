@@ -1,11 +1,11 @@
-.reviews-index {
-  margin: 2rem;
+.bdgreen {
+  border: 2px solid green;
 }
-.venue-detail{
-  margin: 2rem;
+.bdred {
+  border: 2px solid red;
 }
-.title {
-  padding-bottom: 2rem;
+.color-inner {
+  background-color: white;
 }
 .colorsq {
   background-color: #E6E6E6;
@@ -16,6 +16,19 @@
 .noblock {
   display: inline-block;
 }
-.color-inner {
-  background-color: white;
+.nomargin {
+  margin: 0;
+}
+.reviews-index {
+  margin: 2rem;
+}
+.title {
+  padding-bottom: 2rem;
+}
+.venue-detail{
+  margin: 2rem;
+}
+.venue-show-img {
+  width: auto;
+  height: auto;
 }
