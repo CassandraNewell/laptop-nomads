@@ -1,7 +1,14 @@
 class Api::V1::VenuesController < ApiController
-
   def index
-    render json: Venue.all
+    if current_user.admin?
+      payload = {
+        venues: Venue.all,
+        admin: true
+      }
+      render json: payload
+    else
+      render json: Venue.all
+    end
   end
 
   def show

@@ -8,12 +8,15 @@ class VenuesIndexContainer extends Component {
     super(props)
     this.state = {
       venues_array: [],
-      message: "hi cat"
+      message: "hi cat",
+      admin: false
     }
   }
 
   componentDidMount(){
-    fetch(`/api/v1/venues`)
+    fetch(`/api/v1/venues`, {
+      credentials: 'same-origin'
+    })
     .then(response => {
       if (response.ok) {
         return response;
@@ -25,22 +28,32 @@ class VenuesIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
+      debugger
       this.setState({
-        venues_array: body.venues
+        venues_array: body.venues,
+        admin: body.admin
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render(){
+    let admin_powers;
     let venues = this.state.venues_array.map((venue) =>{
+      if(this.state.admin){
+        admin_powers = <Link to={`venue/${venue.id}/update`}>Edit</Link>
+      }
+
       return(
-        <VenueTile
-          key = {venue.id}
-          id = {venue.id}
-          name = {venue.name}
-          photo_url = {venue.photo_url}
-        />
+        <div>
+          <VenueTile
+            key = {venue.id}
+            id = {venue.id}
+            name = {venue.name}
+            photo_url = {venue.photo_url}
+          />
+          {admin_powers}
+        </div>
       )
     })
 

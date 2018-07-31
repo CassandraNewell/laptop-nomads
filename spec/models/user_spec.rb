@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     let(:user3) { FactoryBot.build(:user, email: "") }
     let(:user4) { FactoryBot.build(:user, bio: "") }
     let(:user5) { FactoryBot.build(:user, profile_photo: "") }
+    let(:admin) { FactoryBot.create(:user, role: "admin" }
 
     it "is not valid without a first name" do
       expect(user1).to_not be_valid
@@ -31,6 +32,16 @@ RSpec.describe User, type: :model do
 
     it "is valid with valid attributes" do
       expect(user).to be_valid
+    end
+  end
+
+  describe "#admin?" do
+    it "is not an admin if the role is not admin" do
+      expect(user.admin?).to eq(true)
+    end
+
+    it "is an admin if the role is admin" do
+      expect(admin.admin?).to eq(true)
     end
   end
 end
