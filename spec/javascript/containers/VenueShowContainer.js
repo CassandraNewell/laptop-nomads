@@ -128,10 +128,11 @@ describe('VenueShowContainer', () => {
         });
 
       setTimeout(() => {
-        let listItemCount = wrapper.find('div.review').length
+        // change this and later check to check # props to ReviewsIndexContainer
+        let listItemCount = wrapper.find(ReviewsIndexContainer).props().length
         wrapper.find('form').simulate('submit')
         setTimeout(() => {
-          expect(wrapper.find('div.review').length).toEqual(listItemCount + 1)
+          expect(wrapper.find(ReviewsIndexContainer).props().length).toEqual(listItemCount + 1)
           done()
         })
       }, 0)
