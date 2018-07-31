@@ -11,28 +11,32 @@
 </head>
 <body>
   <div>
-
-
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">Laptop Nomads</a></h1>
-      </li>
-    </ul>
-
-    <section class="top-bar-section">
-      <ul class="right">
-        <%- if current_user -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-          <li><img class="profile_pic" src="<%= current_user.profile_photo %>" alt="<%= current_user.first_name %>" /></li>
-        <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <%- end -%>
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="/">Laptop Nomads</a></h1>
+        </li>
       </ul>
-    </section>
-  </nav>
-</div>
+
+      <section class="top-bar-section">
+        <ul class="right">
+          <%- if current_user -%>
+            <li>
+              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+            </li>
+            <li>
+              <img
+                class="profile_pic" src="<%= current_user.profile_photo %>" alt="<%= current_user.first_name %>"
+              />
+            </li>
+          <%- else -%>
+            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <%- end -%>
+        </ul>
+      </section>
+    </nav>
+  </div>
 
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %>">
@@ -40,7 +44,9 @@
     </div>
   <%- end -%>
 
-  <%= yield %>
+  <div class="column row">
+    <%= yield %>
+  </div>
 
   <%= javascript_include_tag 'application' %>
 

@@ -13,7 +13,8 @@ class VenueFormContainer extends Component {
       venueCloseTime: '',
       venueUrl: '',
       venuePhotoUrl: '',
-      status_messages: '',
+      notice: '',
+      errors: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,10 +53,15 @@ class VenueFormContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ venue: body.venue,
-                        status_messages: body.status_messages
-                      });
-        if(this.state.venue.id){
+        if (body.errors) {
+          this.setState({errors: body.errors})
+        }
+        else {
+          this.setState({
+            venue: body.venue,
+            notice: "Venue successfully added",
+            errors: []
+          })
           this.props.router.push(`/venues/${this.state.venue.id}`)
         }
       })
@@ -110,7 +116,8 @@ class VenueFormContainer extends Component {
           />
           <input type="submit" value="Submit"/>
         </form>
-        <h1>{this.state.status_messages}</h1>
+        <div className="notice">{this.state.notice}</div>
+        <div className="error">{this.state.errors}</div>
       </div>
     )
   }
