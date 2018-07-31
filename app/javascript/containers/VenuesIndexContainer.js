@@ -33,7 +33,6 @@ class VenuesIndexContainer extends Component {
   }
 
   render(){
-
     let venues = this.state.venues_array.map((venue) =>{
       return(
         <VenueTile

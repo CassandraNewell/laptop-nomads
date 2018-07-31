@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import VenueDetailTile from '../components/VenueDetailTile';
 import ReviewsIndexContainer from './ReviewsIndexContainer';
+import ReviewFormContainer from './ReviewFormContainer';
 
 class VenueShowContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       venue: {},
-      reviews: []
+      reviews: [],
+      notice: "",
+      errors: []
     }
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   componentDidMount(){
@@ -32,8 +36,55 @@ class VenueShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  onSubmit(payload) {
+    fetch(`/api/v1/venues/${this.props.params.id}/reviews`, {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      if (body.errors) {
+        this.setState({
+          notice: "",
+          errors: body.errors
+        })
+      }
+      else {
+        this.setState({
+          reviews: this.state.reviews.concat(body.review),
+          notice: "Review successfully added",
+          errors: []
+        })
+      }
+    })
+    .catch(error => {
+      console.error(`Error in fetch: ${error.message}`)
+    });
+  }
+
   render(){
     let venue = this.state.venue
+    let notice
+    let errors
+
+    if (this.state.notice !== "") {
+      notice = <div className="notice">{this.state.notice}</div>
+    }
+
+    if (this.state.errors !== []) {
+      errors = <div className="error">{this.state.errors}</div>
+    }
 
     return(
       <div className="row column">
@@ -48,6 +99,12 @@ class VenueShowContainer extends Component {
         />
         <ReviewsIndexContainer
           reviews = {this.state.reviews}
+        />
+        {notice}
+        {errors}
+        <ReviewFormContainer
+          venue_id = {venue.id}
+          onSubmit = {this.onSubmit}
         />
       </div>
     )
