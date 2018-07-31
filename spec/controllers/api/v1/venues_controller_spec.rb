@@ -49,9 +49,9 @@ RSpec.describe Api::V1::VenuesController, type: :controller do
 
       post_json = {
         venue: {
-        name: first_venue.name,
-        address: first_venue.address,
-        photo_url: first_venue.photo_url
+          name: first_venue.name,
+          address: first_venue.address,
+          photo_url: first_venue.photo_url
       }
     }
       prev_count = Venue.count
@@ -61,9 +61,9 @@ RSpec.describe Api::V1::VenuesController, type: :controller do
 
     it "fails to creates a new venue without required fields" do
       post_json = {
-        venue:{
-        name: first_venue.name,
-        address: first_venue.address
+        venue: {
+          name: first_venue.name,
+          address: first_venue.address
       }
     }
       prev_count = Venue.count
@@ -75,9 +75,9 @@ RSpec.describe Api::V1::VenuesController, type: :controller do
       sign_in user
       post_json = {
         venue: {
-        name: first_venue.name,
-        address: first_venue.address,
-        photo_url: first_venue.photo_url
+          name: first_venue.name,
+          address: first_venue.address,
+          photo_url: first_venue.photo_url
       }
     }
       post(:create, params: post_json)
