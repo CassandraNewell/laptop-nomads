@@ -4,19 +4,19 @@ RSpec.describe ReviewVote, type: :model do
   describe "review_vote validations" do
     let(:user) { FactoryBot.build(:user) }
     let(:venue) { FactoryBot.build(:venue) }
-    let(:review) { FactoryBot.build(:review, user: user, venue: venue) }
+    let(:review) { FactoryBot.build(:review) }
 
     let(:review_vote) {
-      FactoryBot.build(:review_vote, user_id: user.id, review_id: review.id)
+      FactoryBot.build(:review_vote)
     }
     let(:review_vote_no_vote) {
-      FactoryBot.build(:review_vote, vote: nil, user_id: user.id, review_id: review.id)
+      FactoryBot.build(:review_vote, vote: nil)
     }
     let(:review_vote_no_user) {
-      FactoryBot.build(:review_vote, review_id: review.id)
+      FactoryBot.build(:review_vote, user: nil)
     }
-    let(:review_vote_no_venue) {
-      FactoryBot.build(:review_vote, user_id: user.id)
+    let(:review_vote_no_review) {
+      FactoryBot.build(:review_vote, review: nil)
     }
 
     let(:up_review_vote) {
@@ -39,7 +39,7 @@ RSpec.describe ReviewVote, type: :model do
     end
 
     it "is not valid without a review" do
-      expect(review_vote_no_venue).to_not be_valid
+      expect(review_vote_no_review).to_not be_valid
     end
 
     it "is valid with a vote, review, and user" do
