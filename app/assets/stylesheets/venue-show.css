@@ -1,0 +1,21 @@
+.reviews-index {
+  margin: 2rem;
+}
+.venue-detail{
+  margin: 2rem;
+}
+.title {
+  padding-bottom: 2rem;
+}
+.colorsq {
+  background-color: #E6E6E6;
+}
+.inner-padding {
+  padding: 1rem;
+}
+.noblock {
+  display: inline-block;
+}
+.color-inner {
+  background-color: white;
+}
