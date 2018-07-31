@@ -75,6 +75,16 @@ class VenueShowContainer extends Component {
 
   render(){
     let venue = this.state.venue
+    let notice
+    let errors
+
+    if (this.state.notice !== "") {
+      notice = <div className="notice">{this.state.notice}</div>
+    }
+
+    if (this.state.errors !== []) {
+      errors = <div className="error">{this.state.errors}</div>
+    }
 
     return(
       <div className="row column">
@@ -90,8 +100,8 @@ class VenueShowContainer extends Component {
         <ReviewsIndexContainer
           reviews = {this.state.reviews}
         />
-        <div className="notice">{this.state.notice}</div>
-        <div className="error">{this.state.errors}</div>
+        {notice}
+        {errors}
         <ReviewFormContainer
           venue_id = {venue.id}
           onSubmit = {this.onSubmit}
