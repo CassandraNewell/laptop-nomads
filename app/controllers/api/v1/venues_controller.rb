@@ -1,5 +1,4 @@
-class Api::V1::VenuesController < ApplicationController
-  protect_from_forgery unless: -> { request.format.json? }
+class Api::V1::VenuesController < ApiController
 
   def index
     render json: Venue.all
