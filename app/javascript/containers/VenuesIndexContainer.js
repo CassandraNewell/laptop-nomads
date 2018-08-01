@@ -12,6 +12,7 @@ class VenuesIndexContainer extends Component {
       admin: false
     }
     this.handleDelete = this.handleDelete.bind(this);
+    this.confirm = this.confirm.bind(this);
   }
 
   componentDidMount(){
@@ -35,6 +36,14 @@ class VenuesIndexContainer extends Component {
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  confirm(event) {
+    if(confirm('Are you sure you want to delete this venue?')) {
+      this.handleDelete(event);
+    } else {
+      event.preventDefault();
+    }
   }
 
   handleDelete(event) {
@@ -71,7 +80,7 @@ class VenuesIndexContainer extends Component {
           <div>
             <Link to={`venues/${venue.id}/edit`}>Edit Venue</Link>
             <br />
-            <Link to={`venues/${venue.id}`} onClick={this.handleDelete}>Delete Venue</Link>
+            <Link to={`venues/${venue.id}`} onClick={this.confirm}>Delete Venue</Link>
           </div>
 
       }
