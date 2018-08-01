@@ -28,6 +28,8 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
+      console.log("Body of venue show GET")
+      console.log(body)
       this.setState({
         venue: body.venue,
         reviews: body.venue.reviews

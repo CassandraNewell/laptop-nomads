@@ -1,12 +1,6 @@
 require 'faker'
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
+# Create venues
 Venue.create(
   name: "Forge",
   address: "Somerville Ave",
@@ -23,6 +17,14 @@ Venue.create(
   photo_url: "https://pre06.deviantart.net/3389/th/pre/i/2011/187/9/8/dramatic_hover_cat_by_theprophetchuck-d3l8m55.jpg"
 )
 
+Venue.create(
+  name: "Blue Shirt Cafe",
+  address: "Davis Square",
+  photo_url: "https://i.pinimg.com/564x/64/0f/6c/640f6cb231e3f2ee0a4ff70f87eb5e72.jpg"
+)
+
+# Create users
+
 3.times do
     User.create!(
     first_name: Faker::Name.first_name,
@@ -32,37 +34,86 @@ Venue.create(
   )
 end
 
+# Create reviews
+
 Review.create!(
   body: Faker::TwinPeaks.quote,
-  rating: 3,
+  rating: Random.new.rand(1..5),
   venue: Venue.first,
   user: User.first
 )
 
 Review.create!(
   body: Faker::TwinPeaks.quote,
-  rating: 3,
+  rating: Random.new.rand(1..5),
   venue: Venue.first,
   user: User.second
 )
 
 Review.create!(
   body: Faker::TwinPeaks.quote,
-  rating: 3,
+  rating: Random.new.rand(1..5),
+  venue: Venue.first,
+  user: User.third
+)
+
+Review.create!(
+  body: Faker::TwinPeaks.quote,
+  rating: Random.new.rand(1..5),
   venue: Venue.second,
   user: User.first
 )
 
 Review.create!(
   body: Faker::TwinPeaks.quote,
-  rating: 3,
+  rating: Random.new.rand(1..5),
   venue: Venue.second,
   user: User.second
 )
 
 Review.create!(
   body: Faker::TwinPeaks.quote,
-  rating: 3,
+  rating: Random.new.rand(1..5),
   venue: Venue.second,
   user: User.second
 )
+
+# Create review votes
+
+## Same user has each possible vote on three reviews for same venue
+ReviewVote.create!(
+  vote: -1,
+  review: Review.first,
+  user: User.first
+)
+
+ReviewVote.create!(
+  vote: 0,
+  review: Review.second,
+  user: User.first
+)
+
+ReviewVote.create!(
+  vote: 1,
+  review: Review.third,
+  user: User.first
+)
+
+## Different users vote on various reviews
+# ReviewVote.create!(
+#   vote: Random.new.rand(-1..1),
+#   review: Review.first,
+#   user: User.second
+# )
+#
+# ReviewVote.create!(
+#   vote: Random.new.rand(-1..1),
+#   review: Review.second,
+#   user: User.first
+# )
+#
+# ReviewVote.create!(
+#   vote: Random.new.rand(-1..1),
+#   review: Review.second,
+#   user: User.second
+# )
