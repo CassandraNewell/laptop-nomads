@@ -27,48 +27,48 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
   end
 
   describe "POST#create" do
+    before(:each) do
+      sign_in first_user
+    end
+
+    after(:each) do
+      sign_out first_user
+    end
+
     it "creates a new review" do
-      session[:user_id] = 1
       post_json = {
         body: first_review.body,
         rating: first_review.rating,
-        venue_id: first_venue.id
       }
       prev_count = Review.count
-      post(:create, params: post_json)
+      post(:create, params: {venue_id: first_venue.id, review: post_json})
       expect(Review.count).to eq(prev_count + 1)
     end
 
     it "fails to creates a new review without body" do
-      session[:user_id] = 1
       post_json = {
         rating: first_review.rating,
-        venue_id: first_venue.id
       }
       prev_count = Review.count
-      post(:create, params: post_json)
+      post(:create, params: {venue_id: first_venue.id, review: post_json})
       expect(Review.count).to eq(prev_count)
     end
 
     it "fails to creates a new review without rating" do
-      session[:user_id] = 1
       post_json = {
         body: first_review.body,
-        venue_id: first_venue.id
       }
       prev_count = Review.count
-      post(:create, params: post_json)
+      post(:create, params: {venue_id: first_venue.id, review: post_json})
       expect(Review.count).to eq(prev_count)
     end
 
     it "returns the json of the new review" do
-      session[:user_id] = 1
       post_json = {
         body: first_review.body,
         rating: first_review.rating,
-        venue_id: first_venue.id
       }
-      post(:create, params: post_json)
+      post(:create, params: {venue_id: first_venue.id, review: post_json})
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")

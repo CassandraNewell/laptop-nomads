@@ -18,25 +18,17 @@ class Api::V1::VenuesController < ApiController
   def new; end
 
   def create
-    venue = Venue.new(
-      name: params[:name],
-      address: params[:address],
-      description: params[:description],
-      open_time: params[:open_time],
-      close_time: params[:close_time],
-      venue_url: params[:venue_url],
-      photo_url: params[:photo_url]
-    )
+    venue = Venue.new(venue_params)
     if venue.save
-      render json: { venue: venue, status_messages: "Succes!"}
+      render json: venue
     else
-      render json: { venue: {}, status_messages: venue.errors.full_messages.join(', ') }
+      payload = { errors: venue.errors.full_messages }
+      render json: payload
     end
   end
 
-  def update
-
-    binding.pry
-
+  private
+  def venue_params
+    params.require(:venue).permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
   end
 end
