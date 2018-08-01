@@ -1,13 +1,13 @@
 class Api::V1::VenuesController < ApiController
   def index
-    if current_user.admin?
+    if current_user == nil || current_user.role == "member"
+      render json: Venue.all
+    elsif current_user.admin?
       payload = {
         venues: Venue.all,
         admin: true
       }
       render json: payload
-    else
-      render json: Venue.all
     end
   end
 
@@ -29,9 +29,12 @@ class Api::V1::VenuesController < ApiController
 
   def update
     venue = Venue.find(params[:id])
-    venue.update(venue_params)
-
-    render json: venue
+    if venue.update(venue_params)
+      render json: venue
+    else
+      payload = { errors: venue.errors.full_messages }
+      render json: payload
+    end
   end
 
   def destroy
@@ -49,7 +52,8 @@ class Api::V1::VenuesController < ApiController
     end
   end
 
-  private
+private
+
   def venue_params
     params.require(:venue).permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
   end

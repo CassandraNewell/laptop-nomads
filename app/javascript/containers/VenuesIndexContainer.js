@@ -48,7 +48,7 @@ class VenuesIndexContainer extends Component {
 
   handleDelete(event) {
     event.preventDefault();
-    debugger
+    
     fetch(`/api/v1/${event.currentTarget.attributes.href.value}`, {
       credentials: 'same-origin',
       method: 'DELETE'

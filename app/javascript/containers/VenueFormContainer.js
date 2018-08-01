@@ -24,38 +24,39 @@ class VenueFormContainer extends Component {
     fetch(`/api/v1/venues/${this.props.params.id}`, {
       credentials: 'same-origin'
     })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-              error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        this.setState({ venue: body.venue,
-                        status_messages: body.status_messages,
-                        venueName: body.venue.name,
-                        venueAddress: body.venue.address,
-                        venueDescription: body.venue.description,
-                        venueOpenTime: body.venue.open_time,
-                        venueCloseTime: body.venue.close_time,
-                        venueUrl: body.venue.venue_url,
-                        venuePhotoUrl: body.venue.photo_url,
-                        status_messages: ''
-                      });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({ venue: body.venue,
+                      status_messages: body.status_messages,
+                      venueName: body.venue.name,
+                      venueAddress: body.venue.address,
+                      venueDescription: body.venue.description,
+                      venueOpenTime: body.venue.open_time,
+                      venueCloseTime: body.venue.close_time,
+                      venueUrl: body.venue.venue_url,
+                      venuePhotoUrl: body.venue.photo_url,
+                      status_messages: ''
+                    });
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   handleChange(event) {
-    this.setState({[event.target.name]: event.target.value})
+    this.setState({[event.target.name]: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
+
     let formPayload = {
       name: this.state.venueName,
       address: this.state.venueAddress,
@@ -65,8 +66,10 @@ class VenueFormContainer extends Component {
       venue_url: this.state.venueUrl,
       photo_url: this.state.venuePhotoUrl
     };
+
     let url;
     let method;
+
     if(this.props.route.path == "/venues/:id/edit") {
       url = `/api/v1/venues/${this.props.routeParams.id}`;
       method = 'PATCH'
@@ -81,33 +84,39 @@ class VenueFormContainer extends Component {
       body: JSON.stringify(formPayload),
       headers: { 'Content-Type': 'application/json' }
     })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-              error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        if (body.errors) {
-          this.setState({errors: body.errors})
-        }
-        else {
-          this.setState({
-            venue: body.venue,
-            notice: "Venue successfully added",
-            errors: []
-          })
-          this.props.router.push(`/venues/${this.state.venue.id}`)
-        }
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      if (body.errors) {
+        this.setState({errors: body.errors})
+      }
+      else {
+        this.setState({
+          venue: body.venue,
+          notice: "Venue successfully added",
+          errors: []
+        })
+        this.props.router.push(`/venues/${this.state.venue.id}`)
+      }
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
+    let errors
+
+    if (this.state.errors !== []) {
+      errors = <div className="error">{this.state.errors}</div>
+    }
+
     return(
       <div>
         <form className="new-venue-form" onSubmit={this.handleSubmit}>
@@ -160,10 +169,9 @@ class VenueFormContainer extends Component {
           value={this.state.venuePhotoUrl}
           handleChange={this.handleChange}
           />
+          {errors}
           <input type="submit" value="Submit"/>
         </form>
-        <div className="notice">{this.state.notice}</div>
-        <div className="error">{this.state.errors}</div>
       </div>
     )
   }
