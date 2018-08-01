@@ -47,12 +47,8 @@ class ReviewTile extends Component {
           <p> This review has {this.props.downvotes_count} downvotes </p>
           <p> You voted <b>{this.props.user_vote.vote}</b></p>
           <span className = "buttons">
-            <button className="" onClick={this.onClick} name="upvote">
-              {upbutton}
-            </button>
-            <button className="" onClick={this.onClick} name="downvote">
-              {downbutton}
-            </button>
+            <i className="button far fa-thumbs-up"><input className="" onClick={this.onClick} name="upvote"></input></i>
+            <button className="" onClick={this.onClick} name="downvote" title="stuff"> </button>
           </span>
         </div>
       </div>
