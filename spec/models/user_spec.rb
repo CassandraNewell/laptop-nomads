@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "validations" do
-    let(:user) { FactoryBot.build(:user) }
-    let(:user1) { FactoryBot.build(:user, first_name: "") }
-    let(:user2) { FactoryBot.build(:user, last_name: "") }
-    let(:user3) { FactoryBot.build(:user, email: "") }
-    let(:user4) { FactoryBot.build(:user, bio: "") }
-    let(:user5) { FactoryBot.build(:user, profile_photo: "") }
-    let(:admin) { FactoryBot.create(:user, role: "admin" }
+    let!(:user) { FactoryBot.build(:user) }
+    let!(:user1) { FactoryBot.build(:user, first_name: "") }
+    let!(:user2) { FactoryBot.build(:user, last_name: "") }
+    let!(:user3) { FactoryBot.build(:user, email: "") }
+    let!(:user4) { FactoryBot.build(:user, bio: "") }
+    let!(:user5) { FactoryBot.build(:user, profile_photo: "") }
 
     it "is not valid without a first name" do
       expect(user1).to_not be_valid
@@ -36,6 +35,9 @@ RSpec.describe User, type: :model do
   end
 
   describe "#admin?" do
+    let!(:user) { FactoryBot.build(:user) }
+    let!(:admin) { FactoryBot.build(:user, role: "admin") }
+
     it "is not an admin if the role is not admin" do
       expect(user.admin?).to eq(true)
     end
