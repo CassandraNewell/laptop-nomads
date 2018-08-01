@@ -20,6 +20,7 @@ class ReviewsIndexContainer extends Component {
           upvotes_count={review.upvotes_count}
           downvotes_count={review.downvotes_count}
           user_vote={review.user_vote}
+          onVoteClick={this.props.onVoteClick}
         />
       )
     })

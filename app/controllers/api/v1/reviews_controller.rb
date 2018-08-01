@@ -19,6 +19,10 @@ class Api::V1::ReviewsController < ApiController
     end
   end
 
+  def update
+    review = Review.find(params[:id])
+  end
+
   private
   def review_data
     params.require(:review).permit(:body, :rating)

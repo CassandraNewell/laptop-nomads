@@ -24,7 +24,7 @@ class ReviewSerializer < ActiveModel::Serializer
 
   def user_vote
     if object.review_votes.length > 0 && scope
-      object.review_votes.find_by(user: scope).vote
+      object.review_votes.find_by(user: scope)
     end
   end
 end

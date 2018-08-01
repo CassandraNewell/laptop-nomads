@@ -53,8 +53,7 @@ class Api::V1::VenuesController < ApiController
     end
   end
 
-private
-
+  private
   def venue_params
     params.require(:venue).permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
   end

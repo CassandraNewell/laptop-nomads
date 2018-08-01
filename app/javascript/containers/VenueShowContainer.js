@@ -13,6 +13,7 @@ class VenueShowContainer extends Component {
       errors: []
     }
     this.onSubmit = this.onSubmit.bind(this)
+    this.onVoteClick = this.onVoteClick.bind(this)
   }
 
   componentDidMount(){
@@ -73,10 +74,10 @@ class VenueShowContainer extends Component {
     });
   }
 
-  onVote(payload) {
-    fetch(`/api/v1/venues/${this.props.params.id}/reviews`, {
+  onVoteClick(payload) {
+    fetch(`/api/v1/review_votes/${payload.vote.id}`, {
       credentials: 'same-origin',
-      method: 'POST',
+      method: 'PATCH',
       body: JSON.stringify(payload),
       headers: {'Content-Type': 'application/json'}
     })
@@ -91,9 +92,10 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({
-        reviews: body.reviews
-      })
+      console.log(body)
+      // this.setState({
+      //   reviews: body.reviews
+      // })
     })
     .catch(error => {
       console.error(`Error in fetch: ${error.message}`)
@@ -126,6 +128,7 @@ class VenueShowContainer extends Component {
         />
         <ReviewsIndexContainer
           reviews = {this.state.reviews}
+          onVoteClick = {this.onVoteClick}
         />
         {notice}
         {errors}
