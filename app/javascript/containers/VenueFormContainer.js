@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import InputTile from '../components/InputTile'
+import InputTile from '../components/InputTile';
+import Dropzone from 'react-dropzone';
 
 class VenueFormContainer extends Component {
   constructor(props){
@@ -12,12 +13,13 @@ class VenueFormContainer extends Component {
       venueOpenTime: '',
       venueCloseTime: '',
       venueUrl: '',
-      venuePhotoUrl: '',
+      venuePhotoUrl: [],
       notice: '',
       errors: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   componentDidMount() {
@@ -57,15 +59,24 @@ class VenueFormContainer extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let formPayload = {
-      name: this.state.venueName,
-      address: this.state.venueAddress,
-      description: this.state.venueDescription,
-      open_time: this.state.venueOpenTime,
-      close_time: this.state.venueCloseTime,
-      venue_url: this.state.venueUrl,
-      photo_url: this.state.venuePhotoUrl
-    };
+    // let formPayload = {
+    //   name: this.state.venueName,
+    //   address: this.state.venueAddress,
+    //   description: this.state.venueDescription,
+    //   open_time: this.state.venueOpenTime,
+    //   close_time: this.state.venueCloseTime,
+    //   venue_url: this.state.venueUrl,
+    //   photo_url: this.state.venuePhotoUrl
+    // };
+
+    let formPayload = new FormData();
+    formPayload.append("name", this.state.venueName);
+    formPayload.append("address", this.state.venueAddress);
+    formPayload.append("description", this.state.venueDescription);
+    formPayload.append("open_time", this.state.venueOpenTime);
+    formPayload.append("close_time", this.state.venueCloseTime);
+    formPayload.append("venue_url", this.state.venueUrl);
+    formPayload.append("photo_url", this.state.venuePhotoUrl[0]);
 
     let url;
     let method;
@@ -77,12 +88,12 @@ class VenueFormContainer extends Component {
       url = '/api/v1/venues';
       method = 'POST'
     }
-
+    debugger
     fetch(url, {
       credentials: 'same-origin',
       method: method,
-      body: JSON.stringify(formPayload),
-      headers: { 'Content-Type': 'application/json' }
+      body: formPayload
+      // headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
       if (response.ok) {
@@ -110,8 +121,16 @@ class VenueFormContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  onDrop(file) {
+    if(file.length == 1) {
+      this.setState({ venuePhotoUrl: file })
+    } else {
+      this.setState({ message: "You can only upload one photo per venue."})
+    }
+  }
+
   render() {
-    let errors
+    let errors;
 
     if (this.state.errors !== []) {
       errors = <div className="error">{this.state.errors}</div>
@@ -162,15 +181,32 @@ class VenueFormContainer extends Component {
           value={this.state.venueUrl}
           handleChange={this.handleChange}
           />
-          <InputTile
+          {/* <InputTile
           label="Venue Photo"
           name="venuePhotoUrl"
           type="text"
           value={this.state.venuePhotoUrl}
           handleChange={this.handleChange}
-          />
+          /> */}
+          <section>
+            <div className="dropzone">
+              <Dropzone onDrop={this.onDrop}>
+                <p>Try dropping some files here, or click to select files to upload.</p>
+              </Dropzone>
+            </div>
+            <aside>
+              <h2>Dropped files</h2>
+              <ul>
+                {
+                  this.state.venuePhotoUrl.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
+                }
+              </ul>
+            </aside>
+          </section>
           {errors}
+
           <input type="submit" value="Submit"/>
+
         </form>
       </div>
     )
