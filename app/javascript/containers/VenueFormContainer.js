@@ -43,7 +43,7 @@ class VenueFormContainer extends Component {
                         venueOpenTime: body.venue.open_time,
                         venueCloseTime: body.venue.close_time,
                         venueUrl: body.venue.venue_url,
-                        venuePhotoUrl: body.venue.venuePhotoUrl,
+                        venuePhotoUrl: body.venue.photo_url,
                         status_messages: ''
                       });
       })
@@ -65,16 +65,22 @@ class VenueFormContainer extends Component {
       venue_url: this.state.venueUrl,
       photo_url: this.state.venuePhotoUrl
     };
-    debugger
-// /venues/:id/edit
-// venues/new
-      fetch('/api/v1/venues', {
-        credentials: 'same-origin',
-        method: 'POST',
-        body: JSON.stringify(formPayload),
-        headers: { 'Content-Type': 'application/json' }
-      })
+    let url;
+    let method;
+    if(this.props.route.path == "/venues/:id/edit") {
+      url = `/api/v1/venues/${this.props.routeParams.id}`;
+      method = 'PATCH'
+    } else {
+      url = '/api/v1/venues';
+      method = 'POST'
+    }
 
+    fetch(url, {
+      credentials: 'same-origin',
+      method: method,
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
+    })
       .then(response => {
         if (response.ok) {
           return response;

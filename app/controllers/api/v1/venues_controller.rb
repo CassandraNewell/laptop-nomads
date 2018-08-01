@@ -27,6 +27,28 @@ class Api::V1::VenuesController < ApiController
     end
   end
 
+  def update
+    venue = Venue.find(params[:id])
+    venue.update(venue_params)
+
+    render json: venue
+  end
+
+  def destroy
+    venue = Venue.find(params[:id])
+    venue.destroy
+
+    if current_user.admin?
+      payload = {
+        venues: Venue.all,
+        admin: true
+      }
+      render json: payload
+    else
+      render json: Venue.all
+    end
+  end
+
   private
   def venue_params
     params.require(:venue).permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)

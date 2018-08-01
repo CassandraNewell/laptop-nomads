@@ -11,6 +11,7 @@ class VenuesIndexContainer extends Component {
       message: "hi cat",
       admin: false
     }
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount(){
@@ -28,7 +29,32 @@ class VenuesIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      debugger
+      this.setState({
+        venues_array: body.venues,
+        admin: body.admin
+      })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+    debugger
+    fetch(`/api/v1/${event.currentTarget.attributes.href.value}`, {
+      credentials: 'same-origin',
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
       this.setState({
         venues_array: body.venues,
         admin: body.admin
@@ -41,7 +67,13 @@ class VenuesIndexContainer extends Component {
     let admin_powers;
     let venues = this.state.venues_array.map((venue) =>{
       if(this.state.admin){
-        admin_powers = <Link to={`venues/${venue.id}/edit`}>Edit</Link>
+        admin_powers =
+          <div>
+            <Link to={`venues/${venue.id}/edit`}>Edit Venue</Link>
+            <br />
+            <Link to={`venues/${venue.id}`} onClick={this.handleDelete}>Delete Venue</Link>
+          </div>
+
       }
 
       return(
@@ -53,6 +85,7 @@ class VenuesIndexContainer extends Component {
             photo_url = {venue.photo_url}
           />
           {admin_powers}
+          <p></p>
         </div>
       )
     })
