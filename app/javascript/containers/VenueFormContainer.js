@@ -19,10 +19,39 @@ class VenueFormContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    fetch(`/api/v1/venues/${this.props.params.id}`, {
+      credentials: 'same-origin'
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ venue: body.venue,
+                        status_messages: body.status_messages,
+                        venueName: body.venue.name,
+                        venueAddress: body.venue.address,
+                        venueDescription: body.venue.description,
+                        venueOpenTime: body.venue.open_time,
+                        venueCloseTime: body.venue.close_time,
+                        venueUrl: body.venue.venue_url,
+                        venuePhotoUrl: body.venue.venuePhotoUrl,
+                        status_messages: ''
+                      });
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
   }
-
 
   handleSubmit(event) {
     event.preventDefault();
@@ -35,12 +64,16 @@ class VenueFormContainer extends Component {
       venue_url: this.state.venueUrl,
       photo_url: this.state.venuePhotoUrl
     };
-    fetch('/api/v1/venues', {
-      credentials: 'same-origin',
-      method: 'POST',
-      body: JSON.stringify(formPayload),
-      headers: { 'Content-Type': 'application/json' }
-    })
+    debugger
+// /venues/:id/edit
+// venues/new
+      fetch('/api/v1/venues', {
+        credentials: 'same-origin',
+        method: 'POST',
+        body: JSON.stringify(formPayload),
+        headers: { 'Content-Type': 'application/json' }
+      })
+
       .then(response => {
         if (response.ok) {
           return response;
@@ -70,42 +103,49 @@ class VenueFormContainer extends Component {
           label="Venue Name"
           name="venueName"
           type="text"
+          value={this.state.venueName}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Address"
           name="venueAddress"
           type="text"
+          value={this.state.venueAddress}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Description"
           name="venueDescription"
           type="text"
+          value={this.state.venueDescription}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Open Time"
           name="venueOpenTime"
           type="text"
+          value={this.state.venueOpenTime}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Close Time"
           name="venueCloseTime"
           type="text"
+          value={this.state.venueCloseTime}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Url"
           name="venueUrl"
           type="text"
+          value={this.state.venueUrl}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Photo"
           name="venuePhotoUrl"
           type="text"
+          value={this.state.venuePhotoUrl}
           handleChange={this.handleChange}
           />
           <input type="submit" value="Submit"/>

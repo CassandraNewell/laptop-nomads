@@ -33,4 +33,10 @@ class Api::V1::VenuesController < ApiController
       render json: { venue: {}, status_messages: venue.errors.full_messages.join(', ') }
     end
   end
+
+  def update
+
+    binding.pry
+
+  end
 end

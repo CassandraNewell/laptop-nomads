@@ -41,7 +41,7 @@ class VenuesIndexContainer extends Component {
     let admin_powers;
     let venues = this.state.venues_array.map((venue) =>{
       if(this.state.admin){
-        admin_powers = <Link to={`venue/${venue.id}/update`}>Edit</Link>
+        admin_powers = <Link to={`venues/${venue.id}/edit`}>Edit</Link>
       }
 
       return(
