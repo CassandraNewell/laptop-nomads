@@ -12,7 +12,9 @@ class Api::V1::VenuesController < ApiController
   end
 
   def show
-    render json: Venue.find(params[:id])
+    venue = Venue.find(params[:id])
+    photo_data = venue.photo_url
+    render json: {venue: venue, photo_data: photo_data}
   end
 
   def new; end

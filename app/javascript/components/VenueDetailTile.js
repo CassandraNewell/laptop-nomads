@@ -5,7 +5,6 @@ const VenueDetailTile = (props) => {
   if (props.open_time && props.close_time) {
     hours = `Hours: ${props.open_time} - ${props.close_time}`
   }
-debugger
   let photo_url;
   if(props.photo_url){
     photo_url = props.photo_url.url

@@ -13,7 +13,7 @@ class VenueFormContainer extends Component {
       venueOpenTime: '',
       venueCloseTime: '',
       venueUrl: '',
-      venuePhotoUrl: [],
+      // venuePhotoUrl: [],
       notice: '',
       errors: []
     }
@@ -45,7 +45,7 @@ class VenueFormContainer extends Component {
                       venueOpenTime: body.venue.open_time,
                       venueCloseTime: body.venue.close_time,
                       venueUrl: body.venue.venue_url,
-                      venuePhotoUrl: body.venue.photo_url,
+                      // venuePhotoUrl: [body.venue.photo_url],
                       status_messages: ''
                     });
     })
@@ -59,16 +59,6 @@ class VenueFormContainer extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    // let formPayload = {
-    //   name: this.state.venueName,
-    //   address: this.state.venueAddress,
-    //   description: this.state.venueDescription,
-    //   open_time: this.state.venueOpenTime,
-    //   close_time: this.state.venueCloseTime,
-    //   venue_url: this.state.venueUrl,
-    //   photo_url: this.state.venuePhotoUrl
-    // };
-
     let formPayload = new FormData();
     formPayload.append("name", this.state.venueName);
     formPayload.append("address", this.state.venueAddress);
@@ -76,11 +66,13 @@ class VenueFormContainer extends Component {
     formPayload.append("open_time", this.state.venueOpenTime);
     formPayload.append("close_time", this.state.venueCloseTime);
     formPayload.append("venue_url", this.state.venueUrl);
-    formPayload.append("photo_url", this.state.venuePhotoUrl[0]);
+
+    if(this.state.venuePhotoUrl){
+      formPayload.append("photo_url", this.state.venuePhotoUrl[0]);
+    }
 
     let url;
     let method;
-
     if(this.props.route.path == "/venues/:id/edit") {
       url = `/api/v1/venues/${this.props.routeParams.id}`;
       method = 'PATCH'
@@ -88,7 +80,6 @@ class VenueFormContainer extends Component {
       url = '/api/v1/venues';
       method = 'POST'
     }
-    debugger
     fetch(url, {
       credentials: 'same-origin',
       method: method,
@@ -131,9 +122,15 @@ class VenueFormContainer extends Component {
 
   render() {
     let errors;
+    let dropped_files;
 
     if (this.state.errors !== []) {
       errors = <div className="error">{this.state.errors}</div>
+    }
+    if(this.state.venuePhotoUrl) {
+      this.state.venuePhotoUrl.map(file => {
+        dropped_files = <li key={file.name}>{file.name} - {file.size} bytes</li>
+      })
     }
 
     return(
@@ -181,25 +178,16 @@ class VenueFormContainer extends Component {
           value={this.state.venueUrl}
           handleChange={this.handleChange}
           />
-          {/* <InputTile
-          label="Venue Photo"
-          name="venuePhotoUrl"
-          type="text"
-          value={this.state.venuePhotoUrl}
-          handleChange={this.handleChange}
-          /> */}
           <section>
             <div className="dropzone">
               <Dropzone onDrop={this.onDrop}>
-                <p>Try dropping some files here, or click to select files to upload.</p>
+                <p>Drop a photo of the venue here, or click to select the file to upload.</p>
               </Dropzone>
             </div>
             <aside>
-              <h2>Dropped files</h2>
+              <h5>Dropped file</h5>
               <ul>
-                {
-                  this.state.venuePhotoUrl.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
-                }
+                {dropped_files}
               </ul>
             </aside>
           </section>
