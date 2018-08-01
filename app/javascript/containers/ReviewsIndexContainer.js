@@ -5,7 +5,6 @@ class ReviewsIndexContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
     }
   }
 
@@ -18,8 +17,10 @@ class ReviewsIndexContainer extends Component {
           fullname={review.fullname}
           body={review.body}
           rating={review.rating}
-          votes={review.review_votes}
-          />
+          upvotes_count={review.upvotes_count}
+          downvotes_count={review.downvotes_count}
+          user_vote={review.user_vote}
+        />
       )
     })
 

@@ -1,4 +1,6 @@
 class Api::V1::ReviewsController < ApiController
+  # serialization_scope :current_user
+
   def index
     reviews = Review.where(venue_id: params[:venue_id])
     render json: reviews

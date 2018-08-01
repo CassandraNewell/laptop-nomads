@@ -28,8 +28,6 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      console.log("Body of venue show GET")
-      console.log(body)
       this.setState({
         venue: body.venue,
         reviews: body.venue.reviews
@@ -69,6 +67,33 @@ class VenueShowContainer extends Component {
           errors: []
         })
       }
+    })
+    .catch(error => {
+      console.error(`Error in fetch: ${error.message}`)
+    });
+  }
+
+  onVote(payload) {
+    fetch(`/api/v1/venues/${this.props.params.id}/reviews`, {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        reviews: body.reviews
+      })
     })
     .catch(error => {
       console.error(`Error in fetch: ${error.message}`)

@@ -5,7 +5,8 @@ class Api::V1::VenuesController < ApiController
   end
 
   def show
-    render json: Venue.find(params[:id]), include: "reviews, reviews.review_votes"
+    render json: Venue.find(params[:id]), include: ["reviews", "reviews.review_votes"]
+    # render json: Venue.find(params[:id])
   end
 
   def new; end
