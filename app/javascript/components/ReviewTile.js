@@ -56,14 +56,14 @@ class ReviewTile extends Component {
           <p className="review-body">{this.props.body}</p>
         </div>
         <div className="cell small-4">
-          <p> {this.props.upvotes} upvotes &#x2022; {this.props.downvotes} downvotes</p>
-          <p> You voted "hell yah"</p>
+          <p> {this.props.upvotes_count} upvotes &#x2022; {this.props.downvotes_count} downvotes</p>
+          <p> You voted {this.props.user_vote.vote}</p>
           <span className = "buttons">
-            <button className="button" name="upvote">
-              <i className="far fa-thumbs-up" />
+            <button className="success button" name="upvote" onClick={this.onClick}>
+              Upvote
             </button>
-            <button className="button" name="downvote">
-              <i className="far fa-thumbs-down" />
+            <button className="alert button" name="downvote" onClick={this.onClick}>
+              Downvote
             </button>
           </span>
         </div>

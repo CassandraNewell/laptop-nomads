@@ -75,6 +75,7 @@ class VenueShowContainer extends Component {
   }
 
   onVoteClick(payload) {
+    console.log(payload)
     fetch(`/api/v1/review_votes/${payload.review_vote.id}`, {
       credentials: 'same-origin',
       method: 'PATCH',
