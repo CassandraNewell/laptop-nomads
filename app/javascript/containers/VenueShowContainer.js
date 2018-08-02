@@ -75,7 +75,7 @@ class VenueShowContainer extends Component {
   }
 
   onVoteClick(payload) {
-    fetch(`/api/v1/review_votes/${payload.vote.id}`, {
+    fetch(`/api/v1/review_votes/${payload.review_vote.id}`, {
       credentials: 'same-origin',
       method: 'PATCH',
       body: JSON.stringify(payload),
@@ -92,10 +92,12 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
+      console.log("Fetch return:")
       console.log(body)
-      // this.setState({
-      //   reviews: body.reviews
-      // })
+      let new_reviews_state = this.s
+      this.setState({
+        reviews: new_reviews_state
+      })
     })
     .catch(error => {
       console.error(`Error in fetch: ${error.message}`)
