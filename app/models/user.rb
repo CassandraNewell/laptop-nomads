@@ -7,9 +7,13 @@ class User < ApplicationRecord
   mount_uploader :profile_photo, ProfilePhotoUploader
 
   has_many :reviews
-  
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
-  validates :password, presence: true
+
+  def admin?
+    role == "admin"
+    return true
+  end
 end
