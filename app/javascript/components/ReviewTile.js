@@ -4,28 +4,19 @@ class ReviewTile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      vote: this.props.user_vote.vote
     }
     this.onClick = this.onClick.bind(this)
   }
 
   onClick(event) {
-    event.preventDefault()
-
     let new_vote
-    let old_vote = this.state.vote
-
-    console.log("Old vote")
-    console.log(old_vote)
+    let old_vote = this.props.user_vote.vote
 
     if (old_vote === event.target.name) {
       new_vote = "neutral"
     } else {
       new_vote = event.target.name
     }
-
-    console.log("New vote")
-    console.log(new_vote)
 
     let payload = {
       review_vote: {
@@ -47,7 +38,7 @@ class ReviewTile extends Component {
         <div className="votes">
           <p> This review has {this.props.upvotes_count} upvotes </p>
           <p> This review has {this.props.downvotes_count} downvotes </p>
-          <p> You voted <b>{this.state.vote}</b></p>
+          <p> You voted <b>{this.props.user_vote.vote}</b></p>
           <span className = "buttons">
             <button className="button" name="upvote" onClick={this.onClick}>
               Upvote
