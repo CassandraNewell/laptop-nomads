@@ -19,7 +19,7 @@ const ReviewsIndexContainer = (props) => {
         <div className="">
           <h2>Reviews</h2>
         </div>
-        <div className="">
+        <div className="review-each">
           {reviews}
         </div>
       </div>
