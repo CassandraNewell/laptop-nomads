@@ -8,7 +8,6 @@ class VenuesIndexContainer extends Component {
     super(props)
     this.state = {
       venues_array: [],
-      message: "",
       admin: false
     }
     this.handleDelete = this.handleDelete.bind(this);

@@ -13,7 +13,6 @@ class VenueFormContainer extends Component {
       venueOpenTime: '',
       venueCloseTime: '',
       venueUrl: '',
-      // venuePhotoUrl: [],
       notice: '',
       errors: []
     }
@@ -45,7 +44,6 @@ class VenueFormContainer extends Component {
                       venueOpenTime: body.venue.open_time,
                       venueCloseTime: body.venue.close_time,
                       venueUrl: body.venue.venue_url,
-                      // venuePhotoUrl: [body.venue.photo_url],
                       status_messages: ''
                     });
     })
@@ -84,7 +82,6 @@ class VenueFormContainer extends Component {
       credentials: 'same-origin',
       method: method,
       body: formPayload
-      // headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
       if (response.ok) {
