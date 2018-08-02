@@ -17,12 +17,16 @@ class App extends Component {
     return(
       <Router history={browserHistory}>
         <Route path='/'>
+
           <IndexRoute component={VenuesIndexContainer} />
           <Route path='/venues' component={VenuesIndexContainer} />
           <Route path='/venues/new' component={VenueFormContainer} />
+          <Route path='/venues/:id/edit' component={VenueFormContainer} />
+
           <Route path='/venues/:id' component={VenueShowContainer} >
             <Route path='/venues/:id/reviews' component={ReviewsIndexContainer} />
           </Route>
+
         </Route>
       </Router>
     )
