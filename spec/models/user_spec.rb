@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
     let!(:admin) { FactoryBot.build(:user, role: "admin") }
 
     it "is not an admin if the role is not admin" do
-      expect(user.admin?).to eq(true)
+      expect(user.admin?).to eq(false)
     end
 
     it "is an admin if the role is admin" do
