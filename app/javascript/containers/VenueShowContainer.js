@@ -92,11 +92,8 @@ class VenueShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      console.log("Fetch return:")
-      console.log(body)
-      let new_reviews_state = this.s
       this.setState({
-        reviews: new_reviews_state
+        reviews: body.reviews
       })
     })
     .catch(error => {

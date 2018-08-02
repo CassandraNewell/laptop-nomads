@@ -13,13 +13,19 @@ class ReviewTile extends Component {
     event.preventDefault()
 
     let new_vote
+    let old_vote = this.state.vote
 
-    if (this.state.vote == "neutral") {
-      new_vote = event.target.name
-    } else {
-      console.log("changing to neutral")
+    console.log("Old vote")
+    console.log(old_vote)
+
+    if (old_vote === event.target.name) {
       new_vote = "neutral"
+    } else {
+      new_vote = event.target.name
     }
+
+    console.log("New vote")
+    console.log(new_vote)
 
     let payload = {
       review_vote: {

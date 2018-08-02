@@ -1,10 +1,11 @@
 class Api::V1::ReviewVotesController < ApiController
   def update
     review_vote = ReviewVote.find(params[:id])
+    venue = review_vote.review.venue
 
     if review_vote.update(review_vote_params)
-      # binding.pry
-      render json: review_vote
+      reviews = Review.where(venue: venue)
+      render json: reviews
     else
       payload = { errors: review_vote.errors.full_messages }
       render json: payload
@@ -13,6 +14,6 @@ class Api::V1::ReviewVotesController < ApiController
 
   private
   def review_vote_params
-    params.require(:review_vote).permit(:vote)
+    params.require(:review_vote).permit(:vote, :id)
   end
 end

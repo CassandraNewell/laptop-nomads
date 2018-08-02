@@ -5,10 +5,18 @@ class ReviewsIndexContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      reviews: this.props.reviews
     }
+  }
+  
+  componentDidMount(){
+    this.setState({
+      reviews: this.props.reviews
+    })
   }
 
   render(){
+    console.log(this.state.reviews)
     let reviews = this.props.reviews.map(review => {
       return(
         <ReviewTile
