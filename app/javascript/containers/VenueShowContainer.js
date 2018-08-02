@@ -85,7 +85,6 @@ class VenueShowContainer extends Component {
     if (this.state.errors !== []) {
       errors = <div className="error">{this.state.errors}</div>
     }
-
     return(
       <div className="row column">
         <VenueDetailTile
