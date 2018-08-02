@@ -1,11 +1,4 @@
 require 'faker'
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 Venue.create(
   name: "Forge",
@@ -14,13 +7,13 @@ Venue.create(
   open_time: "7 AM",
   close_time: "8 PM",
   venue_url: "http://www.forgebakingco.com",
-  photo_url: "https://78.media.tumblr.com/tumblr_lw1tlukZwH1r5nekno1_500.gif"
+  photo_url: "https://cdn.workfrom.co/files/usermedia/40840-Lgp6uTkoREO2MNru2pFy-63778_1493760130913803_3139082886625872589_n.0.0.jpg"
 )
 
 Venue.create(
   name: "Three Little Figs",
   address: "Highland Ave",
-  photo_url: "https://pre06.deviantart.net/3389/th/pre/i/2011/187/9/8/dramatic_hover_cat_by_theprophetchuck-d3l8m55.jpg"
+  photo_url: "http://2.bp.blogspot.com/-XWKJaRCvs8Q/UClu4AK9nSI/AAAAAAAABZM/P7XyU2IKwsc/s1600/IMG_7979.jpg"
 )
 
 User.create!(
