@@ -50,8 +50,7 @@ describe('VenueDetailTile', () => {
     });
 
 
-  fit('should display the Image', () => {
-    console.log(wrapper.debug())
+  it('should display the Image', () => {
       expect(wrapper.find('img').getDOMNode().getAttribute('src')).toEqual('https://i.pinimg.com/originals/e3/4e/ce/e34ece551a9777790b186c6bfb0dfa82.jpg');
     });
 
