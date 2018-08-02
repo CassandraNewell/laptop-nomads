@@ -1,0 +1,17 @@
+.liked {
+  background-color: #D6D5B3
+}
+
+.disliked {
+  background-color: #ED7B84
+}
+
+.neutral {
+  background-color: #F5DBCB
+}
+
+.review {
+  border: 2px solid darkgrey;
+  border-radius: 2em;
+  padding: 1em 2em
+}
