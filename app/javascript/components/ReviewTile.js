@@ -23,12 +23,19 @@ class ReviewTile extends Component {
 
     return(
       <div className="review grid-x">
-        <div className="cell small-8">
-          <h4>{this.props.fullname} says</h4>
+        <div className="cell small-6">
+          <div className="grid-x">
+            <div className="cell small-6">
+              <h4>{this.props.fullname} says</h4>
+            </div>
+            <div className="cell small-6">
+              {stars}
+            </div>
+          </div>
           <p>{this.props.body}</p>
         </div>
         <div className="cell small-4">
-          {stars}
+          <p>hi</p>
         </div>
       </div>
     )
