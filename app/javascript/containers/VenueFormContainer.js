@@ -7,12 +7,7 @@ class VenueFormContainer extends Component {
     super(props)
     this.state = {
       venue: {},
-      venueName: '',
-      venueAddress: '',
-      venueDescription: '',
-      venueOpenTime: '',
-      venueCloseTime: '',
-      venueUrl: '',
+
       notice: '',
       errors: []
     }
@@ -21,34 +16,34 @@ class VenueFormContainer extends Component {
     this.onDrop = this.onDrop.bind(this);
   }
 
-  componentDidMount() {
-    fetch(`/api/v1/venues/${this.props.params.id}`, {
-      credentials: 'same-origin'
-    })
-    .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-        throw(error);
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      this.setState({ venue: body.venue,
-                      status_messages: body.status_messages,
-                      venueName: body.venue.name,
-                      venueAddress: body.venue.address,
-                      venueDescription: body.venue.description,
-                      venueOpenTime: body.venue.open_time,
-                      venueCloseTime: body.venue.close_time,
-                      venueUrl: body.venue.venue_url,
-                      status_messages: ''
-                    });
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  // componentDidMount() {
+  //   fetch(`/api/v1/venues/${this.props.params.id}`, {
+  //     credentials: 'same-origin'
+  //   })
+  //   .then(response => {
+  //     if (response.ok) {
+  //       return response;
+  //     } else {
+  //       let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //       throw(error);
+  //     }
+  //   })
+  //   .then(response => response.json())
+  //   .then(body => {
+  //     this.setState({ venue: body.venue,
+  //                     status_messages: body.status_messages,
+  //                     venueName: body.venue.name,
+  //                     venueAddress: body.venue.address,
+  //                     venueDescription: body.venue.description,
+  //                     venueOpenTime: body.venue.open_time,
+  //                     venueCloseTime: body.venue.close_time,
+  //                     venueUrl: body.venue.venue_url,
+  //                     status_messages: ''
+  //                   });
+  //   })
+  //   .catch(error => console.error(`Error in venue form fetch: ${error.message}`));
+  // }
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
@@ -101,7 +96,8 @@ class VenueFormContainer extends Component {
         this.setState({
           venue: body.venue,
           notice: "Venue successfully added",
-          errors: []
+          errors: [],
+
         })
         this.props.router.push(`/venues/${this.state.venue.id}`)
       }
@@ -120,6 +116,7 @@ class VenueFormContainer extends Component {
   render() {
     let errors;
     let dropped_files;
+    let venue = this.state.venue
 
     if (this.state.errors !== []) {
       errors = <div className="error">{this.state.errors}</div>
@@ -137,42 +134,42 @@ class VenueFormContainer extends Component {
           label="Venue Name"
           name="venueName"
           type="text"
-          value={this.state.venueName}
+          value={venue.name}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Address"
           name="venueAddress"
           type="text"
-          value={this.state.venueAddress}
+          value={venue.address}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Description"
           name="venueDescription"
           type="text"
-          value={this.state.venueDescription}
+          value={venue.description}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Open Time"
           name="venueOpenTime"
           type="text"
-          value={this.state.venueOpenTime}
+          value={venue.open_time}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Close Time"
           name="venueCloseTime"
           type="text"
-          value={this.state.venueCloseTime}
+          value={venue.close_time}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Url"
           name="venueUrl"
           type="text"
-          value={this.state.venueUrl}
+          value={venue.venue_url}
           handleChange={this.handleChange}
           />
           <section>

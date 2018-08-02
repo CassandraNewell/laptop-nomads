@@ -1,8 +1,7 @@
 class Api::V1::VenuesController < ApiController
   before_action :authorize_user, only: [:edit, :update, :destroy]
-  
+
   def authorize_user
-    binding.pry
     if !user_signed_in? || !current_user.admin?
       raise ActionController::RoutingError.new("Not Found")
     end
