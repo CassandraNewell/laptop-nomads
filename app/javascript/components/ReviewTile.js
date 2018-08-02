@@ -35,7 +35,16 @@ class ReviewTile extends Component {
           <p>{this.props.body}</p>
         </div>
         <div className="cell small-4">
-          <p>hi</p>
+          <p> 99 upvotes &#x2022; 277 downvotes</p>
+          <p> You voted "hell yah"</p>
+          <span className = "buttons">
+            <button className="button" name="upvote">
+              <i className="far fa-thumbs-up" />
+            </button>
+            <button className="button" name="downvote">
+              <i className="far fa-thumbs-down" />
+            </button>
+          </span>
         </div>
       </div>
     )
