@@ -30,7 +30,7 @@ class VenueShowContainer extends Component {
     .then(body => {
       this.setState({
         venue: body.venue,
-        reviews: body.reviews
+        reviews: body.venue.reviews
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
