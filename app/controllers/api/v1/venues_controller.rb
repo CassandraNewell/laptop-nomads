@@ -12,7 +12,9 @@ class Api::V1::VenuesController < ApiController
   end
 
   def show
-    render json: Venue.find(params[:id])
+    venue = Venue.find(params[:id])
+    photo_data = venue.photo_url
+    render json: {venue: venue, photo_data: photo_data}
   end
 
   def new; end
@@ -55,6 +57,6 @@ class Api::V1::VenuesController < ApiController
 private
 
   def venue_params
-    params.require(:venue).permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
+    params.permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
   end
 end

@@ -8,7 +8,6 @@ class VenuesIndexContainer extends Component {
     super(props)
     this.state = {
       venues_array: [],
-      message: "hi cat",
       admin: false
     }
     this.handleDelete = this.handleDelete.bind(this);
@@ -48,7 +47,7 @@ class VenuesIndexContainer extends Component {
 
   handleDelete(event) {
     event.preventDefault();
-    
+
     fetch(`/api/v1/${event.currentTarget.attributes.href.value}`, {
       credentials: 'same-origin',
       method: 'DELETE'
@@ -82,7 +81,6 @@ class VenuesIndexContainer extends Component {
             <br />
             <Link to={`venues/${venue.id}`} onClick={this.confirm}>Delete Venue</Link>
           </div>
-
       }
 
       return(
@@ -91,7 +89,7 @@ class VenuesIndexContainer extends Component {
             key = {venue.id}
             id = {venue.id}
             name = {venue.name}
-            photo_url = {venue.photo_url}
+            photo_url = {venue.photo_url.url}
           />
           {admin_powers}
           <p></p>
