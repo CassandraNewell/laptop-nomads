@@ -16,49 +16,49 @@ class VenueFormContainer extends Component {
     this.onDrop = this.onDrop.bind(this);
   }
 
-  // componentDidMount() {
-  //   fetch(`/api/v1/venues/${this.props.params.id}`, {
-  //     credentials: 'same-origin'
-  //   })
-  //   .then(response => {
-  //     if (response.ok) {
-  //       return response;
-  //     } else {
-  //       let errorMessage = `${response.status} (${response.statusText})`,
-  //           error = new Error(errorMessage);
-  //       throw(error);
-  //     }
-  //   })
-  //   .then(response => response.json())
-  //   .then(body => {
-  //     this.setState({ venue: body.venue,
-  //                     status_messages: body.status_messages,
-  //                     venueName: body.venue.name,
-  //                     venueAddress: body.venue.address,
-  //                     venueDescription: body.venue.description,
-  //                     venueOpenTime: body.venue.open_time,
-  //                     venueCloseTime: body.venue.close_time,
-  //                     venueUrl: body.venue.venue_url,
-  //                     status_messages: ''
-  //                   });
-  //   })
-  //   .catch(error => console.error(`Error in venue form fetch: ${error.message}`));
-  // }
+  componentDidMount() {
+    if (this.props.params.id) {
+      fetch(`/api/v1/venues/${this.props.params.id}`, {
+        credentials: 'same-origin'
+      })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          venue: body.venue,
+          status_messages: body.status_messages,
+          status_messages: ''
+        });
+      })
+      .catch(error => console.error(`Error in venue form fetch: ${error.message}`));
+    }
+  }
 
   handleChange(event) {
+    let venue = this.state.venue
+    venue[event.target.name] = event.target.value
     this.setState({[event.target.name]: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    let venue = this.state.venue
 
     let formPayload = new FormData();
-    formPayload.append("name", this.state.venueName);
-    formPayload.append("address", this.state.venueAddress);
-    formPayload.append("description", this.state.venueDescription);
-    formPayload.append("open_time", this.state.venueOpenTime);
-    formPayload.append("close_time", this.state.venueCloseTime);
-    formPayload.append("venue_url", this.state.venueUrl);
+    formPayload.append("name", venue.name);
+    formPayload.append("address", venue.address);
+    formPayload.append("description", venue.description);
+    formPayload.append("open_time", venue.open_time);
+    formPayload.append("close_time", venue.close_time);
+    formPayload.append("venue_url", venue.venue_url);
 
     if(this.state.venuePhotoUrl){
       formPayload.append("photo_url", this.state.venuePhotoUrl[0]);
@@ -132,42 +132,42 @@ class VenueFormContainer extends Component {
         <form className="new-venue-form" onSubmit={this.handleSubmit}>
           <InputTile
           label="Venue Name"
-          name="venueName"
+          name="name"
           type="text"
           value={venue.name}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Address"
-          name="venueAddress"
+          name="address"
           type="text"
           value={venue.address}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Description"
-          name="venueDescription"
+          name="description"
           type="text"
           value={venue.description}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Open Time"
-          name="venueOpenTime"
+          name="open_time"
           type="text"
           value={venue.open_time}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Close Time"
-          name="venueCloseTime"
+          name="close_time"
           type="text"
           value={venue.close_time}
           handleChange={this.handleChange}
           />
           <InputTile
           label="Venue Url"
-          name="venueUrl"
+          name="venue_url"
           type="text"
           value={venue.venue_url}
           handleChange={this.handleChange}
