@@ -15,11 +15,11 @@ describe('ReviewTile', () => {
     );
   });
 
-  it('should show the reviewer\'s full name and rating', () => {
+  it('should show the reviewer\'s full name', () => {
     expect(wrapper.find('h4').text()).toEqual('Jane Doe says');
   });
 
   it('should show the body of the review', () => {
-    expect(wrapper.find('p').text()).toEqual('This place stinks.');
+    expect(wrapper.find('p.review-body').text()).toEqual('This place stinks.');
   });
 });

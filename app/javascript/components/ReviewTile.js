@@ -32,7 +32,7 @@ class ReviewTile extends Component {
               {stars}
             </div>
           </div>
-          <p>{this.props.body}</p>
+          <p className="review-body">{this.props.body}</p>
         </div>
         <div className="cell small-4">
           <p> 99 upvotes &#x2022; 277 downvotes</p>

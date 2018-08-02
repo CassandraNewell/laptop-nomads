@@ -7,41 +7,41 @@ Venue.create(
   open_time: "7 AM",
   close_time: "8 PM",
   venue_url: "http://www.forgebakingco.com",
-  photo_url: "https://cdn.workfrom.co/files/usermedia/40840-Lgp6uTkoREO2MNru2pFy-63778_1493760130913803_3139082886625872589_n.0.0.jpg"
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg')
 )
 
 Venue.create(
   name: "Three Little Figs",
   address: "Highland Ave",
-  photo_url: "http://2.bp.blogspot.com/-XWKJaRCvs8Q/UClu4AK9nSI/AAAAAAAABZM/P7XyU2IKwsc/s1600/IMG_7979.jpg"
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg')
 )
 
 User.create!(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  email: cassandraleenewell@gmail.com,
-  password: "jj"
+  email: "cassandraleenewell@gmail.com",
+  password: "jjjjjj"
 )
 
 User.create!(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  email: erin@gmail.com,
-  password: "jj"
+  email: "erin@gmail.com",
+  password: "jjjjjj"
 )
 
 User.create!(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  email: sophie@gmail.com,
-  password: "jj"
+  email: "sophie@gmail.com",
+  password: "jjjjjj"
 )
 
 User.create!(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  email: dave@gmail.com,
-  password: "jj"
+  email: "dave@gmail.com",
+  password: "jjjjjj"
 )
 
 Review.create!(
