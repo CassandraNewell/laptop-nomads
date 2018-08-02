@@ -115,26 +115,37 @@ class VenueShowContainer extends Component {
     }
 
     return(
-      <div className="row column">
-        <VenueDetailTile
-          name = {venue.name}
-          address = {venue.address}
-          description = {venue.description}
-          open_time = {venue.open_time}
-          close_time = {venue.close_time}
-          venue_url = {venue.venue_url}
-          photo_url = {venue.photo_url}
-        />
-        <ReviewsIndexContainer
-          reviews = {this.state.reviews}
-          onVoteClick = {this.onVoteClick}
-        />
-        {notice}
-        {errors}
-        <ReviewFormContainer
-          venue_id = {venue.id}
-          onSubmit = {this.onSubmit}
-        />
+      <div className="grid-container">
+        <div className="grid-y grid-margin-y">
+          <div className="cell small-3">
+            <VenueDetailTile
+              name = {venue.name}
+              address = {venue.address}
+              description = {venue.description}
+              open_time = {venue.open_time}
+              close_time = {venue.close_time}
+              venue_url = {venue.venue_url}
+              photo_url = {venue.photo_url}
+            />
+          </div>
+
+          <div className="cell small-7">
+            <ReviewsIndexContainer
+              reviews={this.state.reviews}
+              onVoteClick = {this.onVoteClick}
+            />
+
+            {notice}
+            {errors}
+          </div>
+
+          <div className="cell small-2">
+            <ReviewFormContainer
+              venue_id = {venue.id}
+              onSubmit = {this.onSubmit}
+            />
+          </div>
+        </div>
       </div>
     )
   }

@@ -1,10 +1,17 @@
 class Api::V1::VenuesController < ApiController
   def index
-    if current_user == nil || current_user.role == "member"
+    if current_user == nil
       render json: Venue.all
+    elsif current_user.role == "member"
+      payload = {
+        venues: Venue.all,
+        member: true
+      }
+      render json: payload
     elsif current_user.admin?
       payload = {
         venues: Venue.all,
+        member: true,
         admin: true
       }
       render json: payload
@@ -12,8 +19,8 @@ class Api::V1::VenuesController < ApiController
   end
 
   def show
-    render json: Venue.find(params[:id]), include: ["reviews", "reviews.review_votes"]
-    # render json: Venue.find(params[:id])
+    venue = Venue.find(params[:id], include: ["reviews", "reviews.review_votes"])
+    render json: venue
   end
 
   def new; end
@@ -55,6 +62,6 @@ class Api::V1::VenuesController < ApiController
 
   private
   def venue_params
-    params.require(:venue).permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
+    params.permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
   end
 end

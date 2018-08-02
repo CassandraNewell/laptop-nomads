@@ -11,6 +11,7 @@ describe('VenueDetailTile', () => {
       wrapper;
 
   beforeEach(() => {
+    let url = { url: "https://i.pinimg.com/originals/e3/4e/ce/e34ece551a9777790b186c6bfb0dfa82.jpg" }
     wrapper = mount(
       <VenueDetailTile
         name="Chadwick's"
@@ -19,7 +20,7 @@ describe('VenueDetailTile', () => {
         open_time="4 AM"
         close_time="2 PM"
         venue_url="www.internet.com"
-        photo_url="https://i.pinimg.com/originals/e3/4e/ce/e34ece551a9777790b186c6bfb0dfa82.jpg"
+        photo_url={url}
       />
     );
   });
@@ -47,7 +48,6 @@ describe('VenueDetailTile', () => {
   it('should show the Name', () => {
       expect(wrapper.find('h1').text()).toEqual('Chadwick\'s');
     });
-
 
   it('should display the Image', () => {
       expect(wrapper.find('img').getDOMNode().getAttribute('src')).toEqual('https://i.pinimg.com/originals/e3/4e/ce/e34ece551a9777790b186c6bfb0dfa82.jpg');

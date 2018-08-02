@@ -33,23 +33,32 @@ class ReviewFormContainer extends Component {
 
   render(){
     return(
-      <div>
+      <div className="grid-y bdred">
+        <h2>New Review</h2>
         <form onSubmit={this.passPayload} >
-          <InputTile
-            name="body"
-            label="Write your review:"
-            type="text"
-            value={this.state.body}
-            handleChange={this.handleChange}
-          />
-          <InputTile
-            name="rating"
-            label="Rating (1-5)"
-            type="text"
-            value={this.state.rating}
-            handleChange={this.handleChange}
-          />
-          <input className="submit-button" type="submit" />
+          <div className="row">
+            <div className="column small-8">
+              <InputTile
+                name="body"
+                label="Write your review:"
+                type="text"
+                value={this.state.body}
+                handleChange={this.handleChange}
+                />
+            </div>
+            <div className="column small-4">
+              <InputTile
+                name="rating"
+                label="Rating (1-5)"
+                type="text"
+                value={this.state.rating}
+                handleChange={this.handleChange}
+                />
+            </div>
+          </div>
+          <div>
+            <input className="column submit-button button" type="submit" />
+          </div>
         </form>
       </div>
     )
