@@ -13,14 +13,13 @@ const ReviewsIndexContainer = (props) => {
       />
     )
   })
-
   return(
     <div className="grid-container bdgreen nomargin">
-      <div className="grid-y">
-        <div className="cell small-4 text-center">
+      <div className="">
+        <div className="">
           <h2>Reviews</h2>
         </div>
-        <div className="cell small-8 bdred">
+        <div className="">
           {reviews}
         </div>
       </div>
