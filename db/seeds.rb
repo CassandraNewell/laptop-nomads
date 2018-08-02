@@ -23,14 +23,33 @@ Venue.create(
   photo_url: "https://pre06.deviantart.net/3389/th/pre/i/2011/187/9/8/dramatic_hover_cat_by_theprophetchuck-d3l8m55.jpg"
 )
 
-3.times do
-    User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.email,
-    password: "asdfasdf"
-  )
-end
+User.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: cassandraleenewell@gmail.com,
+  password: "jj"
+)
+
+User.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: erin@gmail.com,
+  password: "jj"
+)
+
+User.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: sophie@gmail.com,
+  password: "jj"
+)
+
+User.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: dave@gmail.com,
+  password: "jj"
+)
 
 Review.create!(
   body: Faker::TwinPeaks.quote,
