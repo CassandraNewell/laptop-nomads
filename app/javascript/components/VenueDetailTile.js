@@ -10,7 +10,7 @@ const VenueDetailTile = (props) => {
     photo_url = props.photo_url.url
   }
   return(
-    <div className=" bdred nomargin">
+    <div className=" bdred margin-top inner-padding">
       <div className="grid-x">
         <div className="cell small-6">
           <h1>{props.name}</h1>

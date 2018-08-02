@@ -22,7 +22,7 @@ class ReviewTile extends Component {
     })
 
     return(
-      <div className="review grid-x">
+      <div className="review grid-x white">
         <div className="cell small-8">
           <div className="grid-x">
             <div className="cell small-8">

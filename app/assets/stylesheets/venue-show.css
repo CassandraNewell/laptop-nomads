@@ -1,8 +1,10 @@
 .bdgreen {
-  border: 2px solid green;
+  /* border: 2px solid green; */
+  background-color: rgb(210, 189, 205)
 }
 .bdred {
-  border: 2px solid red;
+  /* border: 2px solid red; */
+  background-color: rgb(203, 203, 203)
 }
 .color-inner {
   background-color: white;
@@ -19,6 +21,9 @@
 .nomargin {
   margin: 0;
 }
+.margin-top {
+  margin: 2rem 0 0 0;
+}
 .reviews-index {
   margin: 2rem;
 }
@@ -31,4 +36,7 @@
 .venue-show-img {
   width: auto;
   height: auto;
+}
+.white {
+  background-color: rgb(250, 250, 250)
 }
