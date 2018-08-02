@@ -13,5 +13,10 @@
 .review {
   border: 2px solid darkgrey;
   border-radius: 2em;
-  padding: 1em 2em
+  padding: 1em 2em;
+  margin-bottom: 2em
+}
+
+.review-each {
+  margin: 1em
 }
