@@ -14,13 +14,13 @@ Venue.create(
   open_time: "7 AM",
   close_time: "8 PM",
   venue_url: "http://www.forgebakingco.com",
-  photo_url: "https://78.media.tumblr.com/tumblr_lw1tlukZwH1r5nekno1_500.gif"
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg')
 )
 
 Venue.create(
   name: "Three Little Figs",
   address: "Highland Ave",
-  photo_url: "https://pre06.deviantart.net/3389/th/pre/i/2011/187/9/8/dramatic_hover_cat_by_theprophetchuck-d3l8m55.jpg"
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg')
 )
 
 3.times do
