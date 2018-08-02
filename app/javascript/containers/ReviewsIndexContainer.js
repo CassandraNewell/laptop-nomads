@@ -13,11 +13,16 @@ const ReviewsIndexContainer = (props) => {
       />
     )
   })
-
   return(
-    <div>
-      <h2>Reviews</h2>
-      {reviews}
+    <div className="grid-container bdgreen nomargin">
+      <div className="">
+        <div className="">
+          <h2>Reviews</h2>
+        </div>
+        <div className="">
+          {reviews}
+        </div>
+      </div>
     </div>
   )
 }
