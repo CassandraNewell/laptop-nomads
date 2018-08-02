@@ -6,6 +6,6 @@ FactoryBot.define do
     open_time "9am"
     close_time "9pm"
     venue_url "https://www.google.com"
-    photo_url "https://www.awesomeinventions.com/wp-content/uploads/2013/12/unicorn-horn-for-cats.jpg"
+    photo_url { Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg') }
   end
 end

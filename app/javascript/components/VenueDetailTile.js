@@ -5,7 +5,10 @@ const VenueDetailTile = (props) => {
   if (props.open_time && props.close_time) {
     hours = `Hours: ${props.open_time} - ${props.close_time}`
   }
-
+  let photo_url;
+  if(props.photo_url){
+    photo_url = props.photo_url.url
+  }
   return(
     <div>
       <h1>{props.name}</h1>
@@ -16,7 +19,7 @@ const VenueDetailTile = (props) => {
         <p className="hours">{hours}</p>
       </div>
       <div className="column small-6">
-        <img src={props.photo_url} alt={props.name}/>
+        <img src={photo_url} alt={props.name}/>
       </div>
     </div>
   )
