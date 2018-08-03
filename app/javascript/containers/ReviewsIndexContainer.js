@@ -26,8 +26,8 @@ class ReviewsIndexContainer extends Component {
     })
 
     return(
-      <div className="grid-container bdgreen nomargin">
-        <div className="">
+      <div className="grid-container nomargin">
+        <div className="venue_detail">
           <div className="">
             <h2>Reviews</h2>
           </div>

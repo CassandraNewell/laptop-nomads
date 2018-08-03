@@ -33,7 +33,7 @@ class ReviewFormContainer extends Component {
 
   render(){
     return(
-      <div className="grid-y bdred">
+      <div className="grid-y">
         <h2>New Review</h2>
         <form onSubmit={this.passPayload} >
           <div className="row">
@@ -57,7 +57,7 @@ class ReviewFormContainer extends Component {
             </div>
           </div>
           <div>
-            <input className="column submit-button button" type="submit" />
+            <input className="column review_submit" type="submit" />
           </div>
         </form>
       </div>
