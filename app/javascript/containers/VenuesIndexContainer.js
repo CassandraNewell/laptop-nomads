@@ -86,7 +86,7 @@ class VenuesIndexContainer extends Component {
           </div>
       }
       return(
-        <div className="cell small-12 medium-6 large-4">
+        <div key={venue.id} className="cell small-12 medium-6 large-4">
           <VenueTile
             key = {venue.id}
             id = {venue.id}
