@@ -106,11 +106,12 @@ class VenuesIndexContainer extends Component {
       </Link>
     }
     return(
-      <div>
-        <div className="grid-x grid-margin-x align-center">
+      <div className="">
+        <h1 className="site_title">Laptop Nomads</h1>
+        <div className="grid-x grid-margin-x align-spaced">
           {venues}
         </div>
-          {member_settings}
+        {member_settings}
       </div>
     )
   }
