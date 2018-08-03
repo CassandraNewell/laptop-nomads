@@ -77,14 +77,14 @@ class ReviewTile extends Component {
         </div>
         <div className="cell small-4">
           <p> {this.props.upvotes_count} upvotes &#x2022; {this.props.downvotes_count} downvotes</p>
-          <span className = "buttons">
-            <button className="success button" name="upvote" onClick={this.onClick}>
+          <div className = "buttons">
+            <button className="upvote_button" name="upvote" onClick={this.onClick}>
               Upvote
             </button>
-            <button className="alert button" name="downvote" onClick={this.onClick}>
+            <button className="downvote_button" name="downvote" onClick={this.onClick}>
               Downvote
             </button>
-          </span>
+          </div>
         </div>
       </div>
     )

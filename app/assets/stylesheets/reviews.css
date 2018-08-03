@@ -11,12 +11,55 @@
 }
 
 .review {
-  border: 2px solid darkgrey;
-  border-radius: 2em;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+  background-color: #f4f1f2;
+  color: black;
+  border-radius: 6px;
   padding: 1em 2em;
-  margin-bottom: 2em
+  margin-bottom: 2%;
 }
 
 .review-each {
-  margin: 1em
+  margin: 1%;
+}
+
+.review_submit {
+  background-color: #416a74;
+  margin: auto;
+  margin-top: 1%;
+  padding: 1% 1% 1% 1%;
+  text-align: center;
+  font-size: 1.6rem;
+  width: 12rem;
+  border-radius: 4px;
+}
+
+.review_submit:hover {
+    opacity: 0.3;
+}
+
+.buttons {
+  margin: auto;
+}
+
+.upvote_button {
+  margin-right: 2%;
+  background-color: #25a3c3;
+  padding: 3%;
+  border-radius: 6px;
+}
+
+.upvote_button:hover {
+  opacity: 0.3;
+}
+
+.downvote_button {
+  margin-left: 2%;
+  background-color: #c34525;
+  padding: 3%;
+  border-radius: 6px;
+}
+
+.downvote_button:hover {
+  opacity: 0.3;
 }

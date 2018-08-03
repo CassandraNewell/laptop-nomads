@@ -6,7 +6,7 @@
 }
 
 .venue_tile {
-
+  background-color: #744150;
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
   border-radius: 4px;
   text-align: center;
@@ -19,9 +19,12 @@
 .venue_tile:hover {
   opacity: 0.3;
 }
+
 .add_venue_bar {
-  background-color: #21b6a8;
+  background-color: #416a74;
   margin: auto;
+  margin-top: 5%;
+  padding: 2% 1% 2% 1%;
   text-align: center;
   font-size: 1.6rem;
   width: 12rem;
@@ -30,4 +33,9 @@
 
 .add_venue_bar:hover {
     opacity: 0.3;
+}
+
+.venue_name {
+  color: white;
+  margin-top: 3%;
 }

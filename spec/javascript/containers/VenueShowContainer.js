@@ -133,7 +133,7 @@ describe('VenueShowContainer', () => {
           errors: ["Body can't be blank", "Rating is not a number"]
         }
       });
-      wrapper.find('.submit-button').simulate('submit')
+      wrapper.find('.review_submit').simulate('submit')
       setTimeout(() => {
         let error_div = wrapper.find('div.error')
         expect(error_div.text()).toContain("Body can't be blank")
