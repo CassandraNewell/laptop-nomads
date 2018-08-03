@@ -99,16 +99,18 @@ class VenuesIndexContainer extends Component {
       )
     })
     if(this.state.member) {
-      member_settings = <Link to={'/venues/new'}>Add a Venue</Link>
+      member_settings = <Link to={'/venues/new'}>
+        <div className="add_venue_bar">
+        Add a Venue
+        </div>
+      </Link>
     }
     return(
       <div>
         <div className="grid-x grid-margin-x align-center">
           {venues}
         </div>
-        <div className="add_venue_bar">
           {member_settings}
-        </div>
       </div>
     )
   }

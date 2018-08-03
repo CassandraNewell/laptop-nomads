@@ -4,14 +4,14 @@ import { Link } from 'react-router'
 const VenueTile = (props) => {
   return(
     <div className="venue_tile">
-      <div className="">
-
-
       <Link to={`/venues/${props.id}`}>
-      <img src={props.photo_url} alt={props.name} className="venue-index-pic"/>
-      {props.name}
+        <div className="">
+          <img src={props.photo_url} alt={props.name} className="venue-index-pic"/>
+          <div className="venue_name">
+            {props.name}
+          </div>
+        </div>
       </Link>
-      </div>
     </div>
   )
 }
