@@ -21,10 +21,11 @@
 }
 
 .add_venue_bar {
+  color: white;
   background-color: #416a74;
-  margin: auto;
-  margin-top: 5%;
-  padding: 2% 1% 2% 1%;
+  margin: 15px;
+  margin-top: 3%;
+  padding: 1% 1% 1% 1%;
   text-align: center;
   font-size: 1.6rem;
   width: 12rem;
