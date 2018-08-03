@@ -8,19 +8,19 @@ Venue.create(
   open_time: "7 AM",
   close_time: "8 PM",
   venue_url: "http://www.forgebakingco.com",
-  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg')
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/venue/forge_baking_co.jpg'), 'image/jpeg')
 )
 
 Venue.create(
   name: "Three Little Figs",
   address: "Highland Ave",
-  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg')
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/venue/three_little_figs.jpg'), 'image/jpeg')
 )
 
 Venue.create(
   name: "Blue Shirt Cafe",
   address: "Davis Square",
-  photo_url: "https://i.pinimg.com/564x/64/0f/6c/640f6cb231e3f2ee0a4ff70f87eb5e72.jpg"
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/venue/blue_shirt_cafe.jpg'), 'image/jpeg')
 )
 
 User.create!(
