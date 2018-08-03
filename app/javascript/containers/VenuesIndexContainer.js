@@ -107,13 +107,11 @@ class VenuesIndexContainer extends Component {
     }
     return(
       <div className="">
-        <h1>Laptop Nomads</h1>
+        <h1 className="site_title">Laptop Nomads</h1>
         <div className="grid-x grid-margin-x align-spaced">
           {venues}
-          <div className="cell">
-          {member_settings}
-          </div>
         </div>
+        {member_settings}
       </div>
     )
   }

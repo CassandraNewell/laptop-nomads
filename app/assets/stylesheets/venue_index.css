@@ -23,7 +23,7 @@
 .add_venue_bar {
   color: white;
   background-color: #416a74;
-  margin: 15px;
+  margin: auto;
   margin-top: 3%;
   padding: 1% 1% 1% 1%;
   text-align: center;
@@ -39,4 +39,11 @@
 .venue_name {
   color: white;
   margin-top: 3%;
+}
+
+.site_title {
+  text-align: center;
+  font-family: "Bookman Old Style";
+  margin-bottom: 3%;
+  margin-top: 2%;
 }
