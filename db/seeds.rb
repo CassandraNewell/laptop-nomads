@@ -23,7 +23,7 @@ Venue.create(
 Venue.create(
   name: "Blue Shirt Cafe",
   address: "Davis Square",
-  description: "<b>Venue closing on July 29, 2018!</b>Free wifi, great wraps/bowls (fairly large portions, ~$7-8). Small drink selection. Usually lots of seating available; be warned that the management will kick you out if you don't buy something. Little bit of outdoor seating.",
+  description: "VENUE CLOSING on July 29, 2018!\nFree wifi, great wraps/bowls (fairly large portions, ~$7-8). Small drink selection. Usually lots of seating available; be warned that the management will kick you out if you don't buy something. Little bit of outdoor seating.",
   open_time: "8 AM daily",
   close_time: "10 PM daily",
   photo_url: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/venue/blue_shirt_cafe.jpg'), 'image/jpeg')
