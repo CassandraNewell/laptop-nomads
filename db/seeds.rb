@@ -20,36 +20,46 @@ Venue.create(
 Venue.create(
   name: "Blue Shirt Cafe",
   address: "Davis Square",
-  photo_url: "https://i.pinimg.com/564x/64/0f/6c/640f6cb231e3f2ee0a4ff70f87eb5e72.jpg"
+  photo_url: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/unicorn-cake.jpg'), 'image/jpeg')
 )
 
 User.create!(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
+  first_name: "Cassandra",
+  last_name: "Newell",
   email: "cassandraleenewell@gmail.com",
-  password: "jjjjjj"
-)
-
-User.create!(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  email: "erin@gmail.com",
-  password: "jjjjjj"
-)
-
-User.create!(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  email: "sophie@gmail.com",
-  password: "jjjjjj"
-)
-
-User.create!(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  email: "dave@gmail.com",
   password: "jjjjjj",
   role: "admin"
+)
+
+User.create!(
+  first_name: "Erin",
+  last_name: "Christensen",
+  email: "sonofchristensen@gmail.com",
+  password: "jjjjjj",
+  role: "admin"
+)
+
+User.create!(
+  first_name: "Sophie",
+  last_name: "Cho",
+  email: "miss.sophie.c@gmail.com",
+  password: "jjjjjj",
+  role: "admin"
+)
+
+User.create!(
+  first_name: "Dave",
+  last_name: "Atwater",
+  email: "aerocricket@gmail.com",
+  password: "jjjjjj",
+  role: "admin"
+)
+
+User.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: "regularjo@regularjo.com",
+  password: "jjjjjj"
 )
 
 # Create reviews
@@ -96,8 +106,6 @@ Review.create!(
   user: User.second
 )
 
-# Create review votes
-
 ## Same user has each possible vote on three reviews for same venue
 ReviewVote.create!(
   vote: -1,
@@ -118,20 +126,20 @@ ReviewVote.create!(
 )
 
 ## Different users vote on various reviews
-# ReviewVote.create!(
-#   vote: Random.new.rand(-1..1),
-#   review: Review.first,
-#   user: User.second
-# )
-#
-# ReviewVote.create!(
-#   vote: Random.new.rand(-1..1),
-#   review: Review.second,
-#   user: User.first
-# )
-#
-# ReviewVote.create!(
-#   vote: Random.new.rand(-1..1),
-#   review: Review.second,
-#   user: User.second
-# )
+ReviewVote.create!(
+  vote: Random.new.rand(-1..1),
+  review: Review.find(4),
+  user: User.first
+)
+
+ReviewVote.create!(
+  vote: Random.new.rand(-1..1),
+  review: Review.find(4),
+  user: User.second
+)
+
+ReviewVote.create!(
+  vote: Random.new.rand(-1..1),
+  review: Review.find(4),
+  user: User.third
+)
