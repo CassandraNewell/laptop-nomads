@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :venues, only: [:index, :show, :new, :create, :update, :destroy] do
-        resources :reviews, only: [:index, :create]
+        resources :reviews, only: [:index, :create, :update]
       end
+      resources :review_votes, only: [:update, :create]
     end
   end
 

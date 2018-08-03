@@ -91,7 +91,8 @@ describe('VenueShowContainer', () => {
     it('renders a Reviews Index Container', (done) => {
       setTimeout(() => {
         expect(wrapper.find(ReviewsIndexContainer).props()).toEqual({
-          reviews: [review1, review2]
+          reviews: [review1, review2],
+          onVoteClick: jasmine.any(Function)
         })
         done()
       }, 0)

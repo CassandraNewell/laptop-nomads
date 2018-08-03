@@ -13,6 +13,7 @@ class VenueShowContainer extends Component {
       errors: []
     }
     this.onSubmit = this.onSubmit.bind(this)
+    this.onVoteClick = this.onVoteClick.bind(this)
   }
 
   componentDidMount(){
@@ -33,7 +34,7 @@ class VenueShowContainer extends Component {
         reviews: body.venue.reviews
       })
     })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .catch(error => console.error(`Error in venue show mount fetch: ${error.message}`));
   }
 
   onSubmit(payload) {
@@ -73,6 +74,33 @@ class VenueShowContainer extends Component {
     });
   }
 
+  onVoteClick(payload, request_params) {
+    fetch(request_params.endpoint, {
+      credentials: 'same-origin',
+      method: request_params.method,
+      body: JSON.stringify(payload),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        reviews: body.reviews
+      })
+    })
+    .catch(error => {
+      console.error(`Error in fetch: ${error.message}`)
+    });
+  }
+
   render(){
     let venue = this.state.venue
     let notice
@@ -104,13 +132,14 @@ class VenueShowContainer extends Component {
           <div className="cell small-7">
             <ReviewsIndexContainer
               reviews={this.state.reviews}
+              onVoteClick = {this.onVoteClick}
             />
 
             {notice}
             {errors}
           </div>
 
-            <div className="cell small-2">
+          <div className="cell small-2">
             <ReviewFormContainer
               venue_id = {venue.id}
               onSubmit = {this.onSubmit}
