@@ -27,11 +27,7 @@ class Api::V1::VenuesController < ApiController
   end
 
   def show
-    # venue = Venue.find(params[:id], include: ["reviews", "reviews.review_votes"])
-    # render json: venue
-
     render json: Venue.find(params[:id]), include: ["reviews", "reviews.review_votes"]
-    # render json: Venue.find(params[:id])
   end
 
   def new; end

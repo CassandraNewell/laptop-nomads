@@ -8,16 +8,20 @@ class ReviewSerializer < ActiveModel::Serializer
 
   def upvotes_count
     count = 0
-    object.review_votes.each do |review_vote|
-      count += 1 if review_vote.upvote?
+    if object.review_votes
+      object.review_votes.each do |review_vote|
+        count += 1 if review_vote.upvote?
+      end
     end
     count
   end
 
   def downvotes_count
     count = 0
-    object.review_votes.each do |review_vote|
-      count += 1 if review_vote.downvote?
+    if object.review_votes
+      object.review_votes.each do |review_vote|
+        count += 1 if review_vote.downvote?
+      end
     end
     count
   end

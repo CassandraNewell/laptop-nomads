@@ -9,23 +9,43 @@ class ReviewTile extends Component {
   }
 
   onClick(event) {
-    let new_vote
-    let old_vote = this.props.user_vote.vote
+    let payload
+    let request_params
+    let new_vote = event.target.name
 
-    if (old_vote === event.target.name) {
-      new_vote = "neutral"
-    } else {
-      new_vote = event.target.name
-    }
+    if (this.props.user_vote) {
+      let old_vote = this.props.user_vote.vote
 
-    let payload = {
-      review_vote: {
-        vote: new_vote,
-        id: this.props.user_vote.id
+      if (old_vote === new_vote) new_vote = "neutral"
+
+      payload = {
+        review_vote: {
+          vote: new_vote,
+          id: this.props.user_vote.id
+        }
       }
-    }
 
-    this.props.onVoteClick(payload)
+      request_params = {
+        method: "PATCH",
+        endpoint: `/api/v1/review_votes/${this.props.user_vote.id}`
+      }
+
+      this.props.onVoteClick(payload, request_params)
+    } else {
+      payload = {
+        review_vote: {
+          vote: new_vote,
+          review_id: this.props.id
+        }
+      }
+
+      request_params = {
+        method: "POST",
+        endpoint: `/api/v1/review_votes`
+      }
+
+      this.props.onVoteClick(payload, request_params)
+    }
   }
 
   render() {
@@ -33,11 +53,11 @@ class ReviewTile extends Component {
     let stars = numbers.map((number) => {
       if (number > this.props.rating) {
         return(
-          <i className="far fa-star"></i>
+          <i key={`empty${number}`} className="far fa-star"></i>
         )
       } else {
         return(
-          <i className="fas fa-star"></i>
+          <i key={`full${number}`} className="fas fa-star"></i>
         )
       }
     })
@@ -57,7 +77,6 @@ class ReviewTile extends Component {
         </div>
         <div className="cell small-4">
           <p> {this.props.upvotes_count} upvotes &#x2022; {this.props.downvotes_count} downvotes</p>
-          <p> You voted {this.props.user_vote.vote}</p>
           <span className = "buttons">
             <button className="success button" name="upvote" onClick={this.onClick}>
               Upvote

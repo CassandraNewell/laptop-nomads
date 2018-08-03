@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :venues, only: [:index, :show, :new, :create, :update, :destroy] do
         resources :reviews, only: [:index, :create, :update]
       end
-      resources :review_votes, only: [:update]
+      resources :review_votes, only: [:update, :create]
     end
   end
 

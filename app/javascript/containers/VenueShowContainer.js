@@ -34,7 +34,7 @@ class VenueShowContainer extends Component {
         reviews: body.venue.reviews
       })
     })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .catch(error => console.error(`Error in venue show mount fetch: ${error.message}`));
   }
 
   onSubmit(payload) {
@@ -74,11 +74,10 @@ class VenueShowContainer extends Component {
     });
   }
 
-  onVoteClick(payload) {
-    console.log(payload)
-    fetch(`/api/v1/review_votes/${payload.review_vote.id}`, {
+  onVoteClick(payload, request_params) {
+    fetch(request_params.endpoint, {
       credentials: 'same-origin',
-      method: 'PATCH',
+      method: request_params.method,
       body: JSON.stringify(payload),
       headers: {'Content-Type': 'application/json'}
     })
