@@ -86,7 +86,7 @@ class VenuesIndexContainer extends Component {
           </div>
       }
       return(
-        <div>
+        <div className="cell small-12 medium-6 large-4">
           <VenueTile
             key = {venue.id}
             id = {venue.id}
@@ -103,8 +103,12 @@ class VenuesIndexContainer extends Component {
     }
     return(
       <div>
-        {venues}
-        {member_settings}
+        <div className="grid-x grid-margin-x align-center">
+          {venues}
+        </div>
+        <div className="add_venue_bar">
+          {member_settings}
+        </div>
       </div>
     )
   }

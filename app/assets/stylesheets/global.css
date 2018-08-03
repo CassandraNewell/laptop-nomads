@@ -1,0 +1,15 @@
+a {
+  color: black;
+}
+
+a:hover {
+    color: #744150;
+}
+
+body {
+  font-family: "Bookman Old Style";
+}
+
+title {
+  font-family: "Bookman Old Style";
+}
