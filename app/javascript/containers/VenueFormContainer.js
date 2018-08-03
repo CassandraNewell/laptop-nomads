@@ -131,68 +131,74 @@ class VenueFormContainer extends Component {
     }
 
     return(
-      <div>
-        <form className="new-venue-form" onSubmit={this.handleSubmit}>
-          <InputTile
-          label="Venue Name"
-          name="venueName"
-          type="text"
-          value={this.state.venueName}
-          handleChange={this.handleChange}
-          />
-          <InputTile
-          label="Venue Address"
-          name="venueAddress"
-          type="text"
-          value={this.state.venueAddress}
-          handleChange={this.handleChange}
-          />
-          <InputTile
-          label="Venue Description"
-          name="venueDescription"
-          type="text"
-          value={this.state.venueDescription}
-          handleChange={this.handleChange}
-          />
-          <InputTile
-          label="Venue Open Time"
-          name="venueOpenTime"
-          type="text"
-          value={this.state.venueOpenTime}
-          handleChange={this.handleChange}
-          />
-          <InputTile
-          label="Venue Close Time"
-          name="venueCloseTime"
-          type="text"
-          value={this.state.venueCloseTime}
-          handleChange={this.handleChange}
-          />
-          <InputTile
-          label="Venue Url"
-          name="venueUrl"
-          type="text"
-          value={this.state.venueUrl}
-          handleChange={this.handleChange}
-          />
-          <section>
-            <div className="dropzone">
-              <Dropzone onDrop={this.onDrop}>
-                <p>Drop a photo of the venue here, or click to select the file to upload.</p>
-              </Dropzone>
+      <div className="grid-x grid-margin-x align-center">
+        <div className="cell small-12 med-8  large-6">
+          <form className="new-venue-form" onSubmit={this.handleSubmit}>
+            <InputTile
+            label="Venue Name"
+            name="venueName"
+            type="text"
+            value={this.state.venueName}
+            handleChange={this.handleChange}
+            />
+            <InputTile
+            label="Venue Address"
+            name="venueAddress"
+            type="text"
+            value={this.state.venueAddress}
+            handleChange={this.handleChange}
+            />
+            <InputTile
+            label="Venue Description"
+            name="venueDescription"
+            type="text"
+            value={this.state.venueDescription}
+            handleChange={this.handleChange}
+            />
+            <InputTile
+            label="Venue Open Time"
+            name="venueOpenTime"
+            type="text"
+            value={this.state.venueOpenTime}
+            handleChange={this.handleChange}
+            />
+            <InputTile
+            label="Venue Close Time"
+            name="venueCloseTime"
+            type="text"
+            value={this.state.venueCloseTime}
+            handleChange={this.handleChange}
+            />
+            <InputTile
+            label="Venue Url"
+            name="venueUrl"
+            type="text"
+            value={this.state.venueUrl}
+            handleChange={this.handleChange}
+            />
+              {errors}
+            <div className="droppy">
+              <div className="">
+                <section>
+                  <div className="dropzone">
+                    <Dropzone onDrop={this.onDrop}>
+                      <p>Drop a photo of the venue here, or click to select the file to upload.</p>
+                    </Dropzone>
+                  </div>
+                  <aside>
+                    <h5>Dropped file</h5>
+                    <ul>
+                      {dropped_files}
+                    </ul>
+                  </aside>
+                </section>
+
+
+                <input className="add_venue_bar" type="submit" value="Submit"/>
+              </div>
             </div>
-            <aside>
-              <h5>Dropped file</h5>
-              <ul>
-                {dropped_files}
-              </ul>
-            </aside>
-          </section>
-          {errors}
-
-          <input type="submit" value="Submit"/>
-
-        </form>
+          </form>
+        </div>
       </div>
     )
   }
