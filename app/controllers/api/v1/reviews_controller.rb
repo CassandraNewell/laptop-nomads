@@ -1,4 +1,6 @@
 class Api::V1::ReviewsController < ApiController
+  # serialization_scope :current_user
+
   def index
     reviews = Review.where(venue_id: params[:venue_id])
     render json: reviews
@@ -15,6 +17,10 @@ class Api::V1::ReviewsController < ApiController
     else
       render json: { errors: review.errors.full_messages }
     end
+  end
+
+  def update
+    review = Review.find(params[:id])
   end
 
   private

@@ -1,4 +1,12 @@
 class Api::V1::VenuesController < ApiController
+  before_action :authorize_user, only: [:edit, :update, :destroy]
+
+  def authorize_user
+    if !user_signed_in? || !current_user.admin?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
+
   def index
     if current_user == nil
       render json: Venue.all
@@ -19,8 +27,7 @@ class Api::V1::VenuesController < ApiController
   end
 
   def show
-    venue = Venue.find(params[:id])
-    render json: venue
+    render json: Venue.find(params[:id]), include: ["reviews", "reviews.review_votes"]
   end
 
   def new; end
@@ -60,8 +67,7 @@ class Api::V1::VenuesController < ApiController
     end
   end
 
-private
-
+  private
   def venue_params
     params.permit(:name, :address, :description, :open_time, :close_time, :venue_url, :photo_url)
   end
